@@ -1,0 +1,194 @@
+* {
+    transition: all  0.3s ease-in-out;
+    box-sizing: border-box;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+    figure img{
+        margin: 0;
+        width: 100%;
+    }
+
+body,html{
+    margin: 0;
+    padding: 0;
+    font-family: 'calibri';
+    background: #00324D;
+}
+
+h2{
+    text-align: center;
+    font-size: 38px;
+}
+
+label{
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
+section#contenedor{
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+article#vinculo{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+header#inicio{
+    left: 0;
+    margin: 0;
+    padding: 10px 15px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#texto{
+    color: rgb(250, 250, 250);
+    border-left: solid 2px rgb(250, 250, 250);
+    margin-left: 14px;
+    padding-left: 14px;
+    z-index: 3;
+}
+
+#texto h2, #texto p{
+    margin: 0px;
+}
+
+#texto h2{
+    font-size: 21px;
+    text-align: start;
+}
+
+#texto p{
+    font-size: 14px;
+    color: rgb(250, 250, 250);
+}
+
+    #inicio .content{
+        margin: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    #inicio .logo_sena{
+        width: 75px;
+        z-index: 2;
+    }
+
+.contenedor_form{
+    margin: 0;
+    padding: 28px 20px;
+    width: clamp(280px, 83%, 480px);
+    background: rgb(250, 250, 250);
+    border-radius: 30px 0px;
+    min-width: 50vw;
+    min-height: 40vh;
+}
+
+.Formulario #enviar{
+    background: #39A900;
+    border: none;
+    color: rgb(250, 250, 250);
+    border-radius: 14px;
+    font-size: 16px;
+    margin: 25px 0 18px 0;
+    padding: 13px 15px;
+    width: 100%;
+    }
+
+.input_formulario{
+    margin: 28px 20px;
+    position: relative;
+}
+
+    .input_formulario i{
+        border-radius: 15px 0 0 15px;
+        font-size: 23px;
+        color: rgb(250, 250, 250);
+        left: 0;
+        background: #39A900;
+        padding: 14px 12px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-30%);
+    }
+/*
+.input{
+    font-size: 16px;
+    margin: 0;
+    background: transparent;
+    border-bottom: 2px solid #000;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 16px;
+    width: 100%;
+    text-align: center;
+}
+*/
+
+.input{
+    color: #222;
+    background: #EEE;
+    margin: 8px 0px;
+    border-radius: 12px;
+    font-size: 16px;
+    text-align: center;
+    border: none;
+    padding: 16px;
+    width: 100%;
+}
+
+@media screen and (min-width: 700px){
+    header#inicio{
+        z-index: 4;
+        left: 0;
+        margin: 0;
+        padding: 10px 15px;
+        display: flex;
+        top: 15%;
+        width: 100%;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #inicio .logo_sena{
+        width: 70px;
+    }
+    
+    #texto h2, #texto p{
+        margin: 0px;
+    }
+    
+    #texto h2{
+        font-size: 38px;
+    }
+    
+    #texto p{
+        font-size: 16px;
+    }
+    
+    .contenedor_form{
+        width: clamp(280px, 83%, 320px);
+    }
+}

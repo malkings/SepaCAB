@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototipo || Login</title>
+
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="{{ url_for('static' , filename='css/A_login.css') }}">
+
+</head>
+<body>
+
+    <header id="inicio">
+
+        <div class="content">
+
+            <figure class="logo_sena">
+
+                <img src="../static/images/sena.png">
+
+            </figure>
+
+            <article id="texto">
+
+                <h2>SEPA</h2>
+
+                <p>Seguimiento de Etapa Productiva de Aprendices</p>
+
+            </article>
+
+        </div>
+
+    </header>
+
+    <section id="contenedor">
+
+        <div class="contenedor_form">
+
+            <h2>Login</h2>
+            
+            <form action="/login" method="post" class="Formulario">
+
+                <div class="input_formulario">
+
+                    <label for="cedula">Cedula</label>
+
+                    <i class="lni lni-postcard"></i>
+
+                    <input
+                    type="text"
+                    placeholder="1231231231"
+                    required
+                    class="input"
+                    id="cedula"
+                    name="cedula"
+                    max="12"
+                    min="8"
+                    pattern="[0-9]{8,12}"
+                    inputmode="numeric">
+
+                </div>
+
+                <div class="input_formulario">
+
+                    <label for="clave">Contraseña</label>
+
+                    <i class="lni lni-lock-alt"></i>
+
+                    <input
+                    id="clave"
+                    type="password"
+                    placeholder="contraseña"
+                    required
+                    class="input"
+                    name="clave"
+                    maxlength="18"
+                    minlength="8"
+                    pattern="[0-8a-zA-Z]{8,16}"
+                    inputmode="tel">
+
+                </div>
+
+                <button type="submit" id="enviar">INGRESAR</button>
+
+            </form>
+
+            <article id="vinculo">
+
+                <a href="#">olvidó contraseña</a>
+
+            </article>
+
+        </div>
+
+    </section>
+    
+</body>
+</html>

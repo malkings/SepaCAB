@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static' , filename='css/F_bitacora.css') }}"> 
+
+    <title>Bitácora</title>
+
+</head>
+<body>
+
+    <header id="cabecera">
+
+        <section id="content">            
+
+            <div id="texto">
+
+                <p>Proceso Gestión de Formación Profesional Integral Formato Bitácora Seguimiento Etapa Productiva</p>
+
+            </div>
+
+            <div id="ver-cod">
+                <div id="version" class="borde-caja">Versión: {{version}}</div>
+                <div id="codigo" class="borde-caja">Código: {{codigo}}</div>
+            </div>
+
+        </section>
+
+    </header>    
+
+<!--Lineamiento de trabajo actual-->
+
+    <section id="contenedor-bitacora">    
+
+        <article id="content-form-bitacora">
+
+            <div class="borde-caja">
+
+                <h2>Regional: {{regional_aprend}}</h2>
+            </div>
+            
+            <div class="borde-caja">
+
+                <h2>Centro: {{centro_aprend}}</h2>
+            </div>
+
+        </article>
+
+        <div id="titulo-bita" class="borde-caja">
+
+            <h2>BITÁCORA DE SEGUIMIENTO ETAPA PRODUCTIVA</h2>
+        </div>
+
+        <article>
+
+            <p>Nombre de la empresa donde está realizando la etapa productiva:  {{razon_social}}</p>
+
+            <p>NIT: {{nit}}</p>
+
+            <form action="/inputBitacora" name="input_bit" id="input_bit" method="post">
+
+                <div class="contendor_inputs" id="num-bitacora">
+
+                    <label for="">BITÁCORA N°</label>
+
+                    <input 
+                    type="tel"
+                    inputmode="numeric"
+                    required
+                    class="empresa-aprendiz"
+                    id="bit-num"
+                    name="bit-num"
+                    min="1"
+                    max="12"
+                    pattern="[0-9]{1,2}">
+
+                </div>
+
+                <div class="contendor_inputs" id="periodo">
+
+                    <label for="">Período</label>
+
+                    <input 
+                    type="text"
+                    id="periodo"
+                    name="periodo"
+                    required
+                    class="empresa-aprendiz">
+
+                </div>
+
+                <div id="caja-boton">
+                    
+                    <button type="submit" class="btn_enviar">ENVIAR BITACORA</button>
+                </div>
+            </form>
+
+                <h3>Modalidad de etapa productiva {{modalidad}}</h3>
+
+                <div>
+
+                    <label for="">Nombre del Aprendiz</label>
+
+                    <input 
+                    type="text"
+                    id="nom-aprend"
+                    name="nom-aprend"
+                    class="dato_aprendiz"
+                    required
+                    minlength="3"
+                    maxlength="18"
+                    pattern="[A-Z]{3,18}">
+
+                </div>
+
+                <div>
+
+                    <label for="">Documento Id.</label>
+
+                    <input 
+                    type="text"
+                    inputmode="numeric"
+                    required
+                    class="dato_aprendiz"
+                    id="documento-aprend"
+                    name="documento-aprend"
+                    min="8"
+                    max="10"
+                    pattern="[0-9]{8,10}">
+
+                </div>
+
+                <div>
+
+                    <label for="">Telefonó de contacto</label>
+
+                    <input 
+                    type="tel"
+                    inputmode="numeric"
+                    class="dato_aprendiz"
+                    id="telefono-aprend"
+                    name="telefono-aprend"
+                    min="10"
+                    max="10"
+                    required
+                    pattern="[0-9]{10}">
+
+                </div>
+
+                <div>
+
+                    <label for="">Correo electrónico institucional</label>
+
+                    <input 
+                    type="email"
+                    class="dato_aprendiz"
+                    id="correo-aprend"
+                    name="correo-aprend"
+                    minlength="6"
+                    maxlength="28"
+                    required
+                    placeholder="name@example.com"
+                    pattern="[A-Z0-9]{6-28}">
+
+                </div>
+
+                <div>
+
+                    <label for="">Número de ficha</label>
+
+                    <input 
+                    type="text"
+                    inputmode="numeric"
+                    id="num-ficha"
+                    name="num-ficha"
+                    class="dato_aprendiz"
+                    minlength="7"
+                    maxlength="9"
+                    pattern="[0-9]{7,9}"
+                    required>
+
+                </div>
+
+                <div>
+
+                    <label for="">Programa de formación</label>
+
+                    <input 
+                    type="text"
+                    id="programa-aprend"
+                    name="programa-aprend"
+                    class="dato_aprendiz"
+                    required
+                    minlength="10"
+                    maxlength="68"
+                    pattern="[A-Z]{10,68}">
+                </div>
+
+
+                <div id="descripcion-bita">
+                    <div>
+
+                        <label for="">DESCRIPCIÓN DE LA ACTIVIDAD</label>
+
+                        <input
+                        type="text"
+                        id="actividad-aprend-uno"
+                        name="actividad-aprend-uno"
+                        required
+                        minlength="6"
+                        maxlength="72"
+                        pattern="[A-Z0-9]{6,72}"
+                        class="general">
+
+                        <input
+                        type="text"
+                        id="actividad-aprend-dos"
+                        name="actividad-aprend-dos"
+                        required
+                        minlength="6"
+                        maxlength="72"
+                        pattern="[A-Z0-9]{6,72}"
+                        class="general">
+
+                        <input
+                        type="text"
+                        id="actividad-aprend-tres"
+                        name="actividad-aprend-tres"
+                        required
+                        minlength="6"
+                        maxlength="72"
+                        pattern="[A-Z0-9]{6,72}"
+                        class="general">
+
+                        <input
+                        type="text"
+                        id="actividad-aprend-cuatro"
+                        name="actividad-aprend-cuatro"
+                        required
+                        minlength="6"
+                        maxlength="72"
+                        pattern="[A-Z0-9]{6,72}"
+                        class="general">
+
+                    </div>
+                
+
+                    <div>
+
+                        <label for="">FECHA INICIO</label>
+
+                        <input
+                        type="date"
+                        id="inicio-aprend-uno"
+                        name="inicio-aprend-uno"
+                        class="general"
+                        required>
+
+                        <input
+                        type="date"
+                        id="inicio-aprend-dos"
+                        name="inicio-aprend-dos"
+                        class="general"
+                        required>
+
+                        <input
+                        type="date"
+                        id="inicio-aprend-tres"
+                        name="inicio-aprend-tres"
+                        class="general"
+                        required>
+
+                        <input
+                        type="date"
+                        id="inicio-aprend-cuatro"
+                        name="inicio-aprend-cuatro"
+                        class="general"
+                        required>
+
+                    </div>
+
+                    <div>
+
+                        <label for="">FECHA FIN</label>
+
+                        <input
+                        type="date"
+                        id="fin-aprend-uno"
+                        name="fin-aprend-uno"
+                        required
+                        class="general">
+
+                        <input
+                        type="date"
+                        id="fin-aprend-dos"
+                        name="fin-aprend-dos"
+                        required
+                        class="general">
+
+                        <input
+                        type="date"
+                        id="fin-aprend-tres"
+                        name="fin-aprend-tres"
+                        required
+                        class="general">
+
+                        <input
+                        type="date"
+                        id="fin-aprend-cuatro"
+                        name="fin-aprend-cuatro"
+                        required
+                        class="general">
+
+                    </div>
+
+                    <div>
+
+                        <label for="">EVIDENCIA DE CUMPLIMIENTO</label>
+
+                        <input
+                        type="text"
+                        id="evidencia-aprend-uno"
+                        name="evidencia-aprend-uno"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        class="general"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="evidencia-aprend-dos"
+                        name="evidencia-aprend-dos"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        class="general"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="evidencia-aprend-tres"
+                        name="evidencia-aprend-tres"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        class="general"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="evidencia-aprend-cuatro"
+                        name="evidencia-aprend-cuatro"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        class="general"
+                        pattern="[A-Z]{10,72}">
+
+                    </div>
+
+                    <div id="observaciones-bita">
+
+                        <label for="">OBSERVACIONES, INASISTENCIAS Y/O DIFICULTADES PRESENTADAS</label>
+
+                        <input
+                        type="text"
+                        id="observacion-aprend-uno"
+                        name="observacion-aprend-uno"
+                        class="general"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="observacion-aprend-dos"
+                        name="observacion-aprend-dos"
+                        class="general"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="observacion-aprend-tres"
+                        name="observacion-aprend-tres"
+                        class="general"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        pattern="[A-Z]{10,72}">
+
+                        <input
+                        type="text"
+                        id="observacion-aprend-cuatro"
+                        name="observacion-aprend-cuatro"
+                        class="general"
+                        required
+                        minlength="10"
+                        maxlength="72"
+                        pattern="[A-Z]{10,72}">
+
+                    </div>
+                </div>
+
+              
+        </article>
+
+    </section>
+
+    <div id="recordatorio-aprend">
+        <h4>Aprendiz: recuerde diligenciar completamente el informe y entregarlo o subirlo al espacio asignado para este.</h4>
+    </div>
+
+    <div id="" class="borde-caja">
+        <h4>Nombre del Aprendiz:</h4>
+        
+        <h2>{{nombre_aprend}}</h2>
+
+        <h4>Firma del aprendiz</h4>
+
+        <h4>Fecha de entrega de la bitácora</h4>
+
+        <h4>Nombre del Instructor de Seguimiento</h4>
+
+        <h4>Firma de instructor de Seguimiento</h4>
+
+        <h4>Firma del jefe inmediato (si es del caso)</h4>
+
+        <h4>Nota: LOS DATOS PROPORCIONADOS SERÁN TRATADOS DE ACUERDO CON LA POLÍTICA DE TRATAMIENTO DE DATOS PERSONALES DEL SENA Y A LA LEY 1581 DE 2012.</h4>
+    </div>
+
+</body>
+</html>

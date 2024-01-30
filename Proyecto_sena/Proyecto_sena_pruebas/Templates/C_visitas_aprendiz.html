@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitas || Aprendiz</title>
+
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/C_visitas_aprendiz.css') }}">
+
+</head>
+<body>
+    
+    
+    <header id="inicio">
+
+        <div id="content">
+
+            <figure class="logo_sena">
+
+                <img src="../static/images/sena_w.png" alt="">
+
+            </figure>
+
+            <article id="texto">
+
+                <h2>SEPA</h2>
+
+                <p>Seguimiento de Etapa Productiva de Aprendices</p>
+
+            </article>
+
+            <article id="cerrar">
+
+                <i class="lni lni-exit" id="boton_cerrar"></i>
+            </article>
+        </div>
+    </header>
+    
+    <main id="menu">
+
+        <section id="vinculo">
+
+            <a id="home-perfil" href="B_home_aprendiz.html">
+            
+                <i class="lni lni-home principal"></i>
+            </a>
+
+            <a id="home-visitas" href="C_visitas_aprendiz.html">
+            
+                <i class="lni lni-travel principal"></i>
+            </a>
+
+            <a id="home-notificacion" href="notificaciones_aprendiz.html">
+                
+                <i class="lni lni-envelope principal"></i>
+            </a>
+
+            <a id="home-empresa" href="E_empresa_asignada.html">
+            
+                <i class="lni lni-apartment principal"></i>
+            </a>
+
+        </section>
+
+        <section id="visitas">
+
+            <h3 id="primer_titulo">Visitas realizadas</h3>
+
+            <article id="visitas_semaforo">
+
+                <table id="contenido_visita">
+
+                    <tr>
+
+                        <td class="visita_titulo">Visita 1</td>
+
+                        <td>{{visita_01}}</td>
+                        
+                        <td>{{Fecha_Visita1}}</td>
+
+                    </tr>
+                    <tr>
+
+                        <td class="visita_titulo">Visita 2</td>
+
+                        <td>{{visita_02}}</td>
+
+                        <td>{{Fecha_Visita2}}</td>
+
+                    </tr>
+                    <tr>
+
+                        <td class="visita_titulo">Visita 3</td>
+
+                        <td>{{visita_03}}</td>
+
+                        <td>{{Fecha_Visita3}}</td>
+
+                    </tr>
+                </table>
+            </article>
+
+            <article id="adicional">
+
+                <h3 id="observacion_01">Observaciones</h3>
+                <p id="observacion_02">{{Obsevacion}}</p>
+
+                <h3 id="fecha_01">Fecha de la Observacion</h3>
+                <p id="fecha_02">{{fecha_observacion}}</p>
+
+            </article>
+        </section>
+    </main>
+
+</body>
+</html>

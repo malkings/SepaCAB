@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones || Aprendiz</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/D_notificacion_aprendiz.css') }}">
+</head>
+<body>
+    
+    <div class="contenedor_principal_notificaciones">
+
+        <div class="cerrar_sesion">
+
+            <button class="boton_cerrar" type="submit">Cerrar Sesion</button>
+
+        </div>
+
+        <h2 id="notificaciones">Notificaciones</h2>
+
+        <div class="menu">
+
+            <a href="home_aprendiz.html">Datos</a>
+
+            <a href="visitas_aprendiz.html">Visitas</a>
+
+            <a href="notificaciones_aprendiz.html">Notificaciones</a>
+
+            <a href="">Instructor de Seguimiento</a>
+
+            <a href="empresa_asignada.html">Datos de la Empresa</a>
+          
+        </div>   
+
+        <div class="marcador_notificaciones">
+            
+            <table>
+
+                <tr>
+
+                    <td>
+                        
+                        <a href="">Todas</a>
+                    
+                    </td>
+
+                    <td>
+                        
+                        <a href="">No leidas</a>
+                    
+                    </td>
+
+                    <td>
+                        
+                        <a href="">Leidas</a>
+                    
+                    </td>
+
+                    <td>
+                        <button class="open-modal" data-open="modal1">Redactar Correo</button>
+
+                        <div class="modal" id="modal1" data-animation="slideInOutLeft">
+
+                            <div class="modal-dialog">
+
+                                <header class="modal-header">
+
+                                    Mensaje Nuevo
+
+                                    <button class="close-modal" aria-label="close modal" data-close> ✕ </button>
+  
+                                    <form action="/Notificaciones" method="post">
+
+                                        <label for="persona_dirijido">Para</label>
+
+                                        <input
+                                        type="text"
+                                        required
+                                        name="persona_dirijido"
+                                        id="persona_dirijido">
+
+                                        <label>Asunto</label>
+
+                                        <input for="asunto"
+                                        type="text"
+                                        required
+                                        id="asunto"
+                                        name="asunto">
+
+                                        <label for="contenido_correo"></label>
+
+                                        <input
+                                        type="text"
+                                        required
+                                        id="contenido_correo"
+                                        name="contenido_correo">
+                               
+                                    </form>    
+
+                                </header>
+
+                                <button type="submit" class="enviar_notificacion">ENVIAR</button>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </div>
+
+        <div class="contenedor_notificaciones">
+
+        </div>
+
+    </div>
+
+    <script src="/JavaScript/notificacion_aprendiz.js"></script>
+</body>
+</html>
