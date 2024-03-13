@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+
+:root {
+    --azul-oscuro: #00324D;
+    --beige: #FBFBE2;
+    --gris-oscuro: #58595B;
+    --gris-suave: #D1D3D4;
+    --verde-suave: #39A900;    
+}
+
+* {
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+    figure img {
+        margin: 0;
+        width: 100%;
+    }
+
+main {
+    margin: 60px 0 0 0;
+}
+
+p {
+    color: var(--azul-oscuro);
+}
+
+
+#logo_sena {
+    width: 100px;    
+}
+
+#cont_primero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#cont_segundo .Marca {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .Marca p {
+        margin: 0 0 20px 0;
+    }
+
+    .Marca h1 {
+        color: var(--azul-oscuro);
+    }
+
+#zona_superior {
+    border-bottom: solid var(--verde-suave) 2px;
+}
+
+#zona_inferior {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form#ingreso_forma {
+    
+    margin: 20px 0 0 0;    
+}
+
+form#ingreso_forma #cedulaingreso,#correoingreso, #claveingreso {
+    margin: 0 0 20px 0;
+    width: 230px;
+    padding: 15px;
+    border: none;
+    border-bottom: solid 1px var(--gris-oscuro);
+    
+}
+
+    form#ingreso_forma #cod_recupera, #nuevaclave, #codigoingreso, #clavenueva, #claveconfirma {
+        margin: 0 0 20px 0;
+            width: 230px;
+        padding: 15px;
+        border: none;
+        border-bottom: solid 1px var(--gris-oscuro);
+        
+    }
+
+    .Forma-Ingreso i{        
+        font-size: 25px;
+        transform: translateY(50%);        
+    }
+
+#caja_selec label{
+    font-size: 14px;
+    color: var(--azul-oscuro);
+}
+
+#caja_selec #cajita {
+    transform: translateY(13%);
+}
+
+#btn_ingresar { 
+    font-size: medium;   
+    border: none;
+    border-radius: 2px;
+    width: 100%;
+    padding: 13px;
+    margin: 30px 0 0 0;
+    color: var(--beige);
+    background: var(--verde-suave);
+
+}
+
+    #btn_ingresar:hover{
+
+        background: #327511;
+    }
+
+h4{
+    text-align: center;
+    color: var(--azul-oscuro);
+
+}
+
+h3{
+    text-align: center;
+    color: var(--azul-oscuro);
+
+}
+
+#mensaje_error{
+
+    color: #dc4b4b;
+
+}
+
+#mensaje_confirma{
+
+    color: #39A900;
+
+}
+
+/* ----------------------------------------------- */
+/*para dispositivos con un ancho máximo de 767px*/
+@media (max-width: 767px) {
+    body {
+        font-size: 14px;
+    }
+
+    #zona_superior {
+        text-align: center;
+    }
+
+    #cont_primero {
+        margin-bottom: 20px;
+    }
+
+    #cont_segundo {
+        text-align: center;
+    }
+
+    .Forma-Ingreso {
+        width: 100%; 
+        margin-bottom: 15px;
+    }
+}

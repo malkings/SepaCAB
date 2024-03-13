@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lrp|SEPA</title>
+
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/loginsepa/loginsepa.css') }}">
+</head>
+<body>
+    
+    <main>
+        <section id="zona_superior">
+            <div id="cont_primero">
+                <figure id="logo_sena">
+                    <img src="/static/images/sena.png" alt="">
+                </figure>
+            </div>
+
+            <div id="cont_segundo">
+                <div class="Marca">
+                    <h1>SEPA/SENA-CAB</h1>
+                </div>
+
+                <div class="Marca">
+                    <p>Seguimiento de Etapa Productiva de Aprendices</p>
+                </div>
+            </div>
+        </section>
+
+        <h4>Ingresa tu correo registrado en SEPA</h4>
+
+        <h3 id="mensaje_error">{{mensaje_error}}</h3>
+
+        <section id="zona_inferior">
+            
+            <form action="/envia_correo" method="POST" name="ingreso_forma" id="ingreso_forma">
+                
+                <div class="Forma-Ingreso">
+                    <i class="lni lni-user"></i>                  
+                    <input type="email" name="correoingreso" id="correoingreso" placeholder="Correo" minlength="10" maxlength="32"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    inputmode="email" required tabindex="1">
+
+                </div>
+
+                <button type="submit" id="btn_ingresar" tabindex="2">Enviar</button>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>

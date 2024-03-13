@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEPA | Instructor</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/globalcss_instru.css">
+    <link rel="stylesheet" href="/static/css/ver_bitacoras_instru.css">
+    
+</head>
+
+<body>
+
+    <header id="cabezote">
+
+        <figure id="logo_sena"><img src="/static/img/logos/logo_sena.png" alt="sena"></figure>
+
+        <div class="elemento-menu"><a href="/cerrar_sesion_instru" class="boton">Cerrar sesion</a></div>
+    </header>
+
+    <div class="barra_menu_btn">
+        <a href="/home_instru"><i class="lni lni-home"></i></a>
+        <a href="/perfil_instru">Perfil</a>
+        <a href="/aprendices_instru" >Aprendices</a>
+        <a href="/obser_instru">Observaciones</a>
+    </div>
+
+    <div class="contenedor">
+        <!-- Contenido de la página -->
+        <h2>Bitacoras del aprendiz</h2>
+
+        <div class="cont_contenido">
+
+            <form>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° de bitacora</th>
+                            <td>Estado</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>1</th>
+                            <td>si</td>
+                        </tr>
+                        <tr>
+                            <th>2</th>
+                            <td>si</td>
+                        </tr>
+                        <tr>
+                            <th>3</th>
+                            <td>si</td>
+                        </tr>
+                        <tr>
+                            <th>4</th>
+                            <td>si</td>
+                        </tr>
+                        <tr>
+                            <th>5</th>
+                            <td>si</td>
+                        </tr>
+                        <tr>
+                            <th>6</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>7</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>8</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>9</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>10</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>11</th>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <th>12</th>
+                            <td>no</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="submit">Enviar</button>
+            </form>
+            
+        </div>
+    </div>
+
+{% if var_modal_bueno == "true" %}
+
+    <div id="myModal" class="modal" style="display: block;">
+    <div class="modal-content">
+        <span class="close"><a href="/perfil_instru">&times;</a></span>
+
+        <i class="lni lni-thumbs-up" id="icono_modal_bueno"></i>
+        <p class="cont_modal">Se han guardado los datos con exito</p>
+
+        <button class="btn_modal"><a href="/perfil_instru">Cerrar</a></button>
+    </div>
+    </div>
+
+    <script src="/static/js/perfil_instru.js"></script>
+
+{% endif %}
+
+{% if var_modal_malo == "true" %}
+
+    <div id="myModal" class="modal" style="display: block;">
+    <div class="modal-content">
+        <span class="close"><a href="/perfil_instru">&times;</a></span>
+
+        <i class="lni lni-sad" id="icono_modal_malo"></i>
+        <p class="cont_modal" id="cont_modal_malo">{{mensaje}}</p>
+
+        <button class="btn_modal"><a href="/perfil_instru">Cerrar</a></button>
+    </div>
+    </div>
+
+    <script src="/static/js/perfil_instru.js"></script>
+
+{% endif %}
+
+</body>
+
+<div id="piepagina">
+    <!-- Contenido del footer -->
+    <p>Política de privacidad
+    Términos de servicio
+    &copy; 2023 SENA-CAB. Todos los derechos reservados.</p>
+</div>
+
+</html>

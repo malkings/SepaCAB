@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEPA | Instructor</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/globalcss_instru.css">
+    <link rel="stylesheet" href="/static/css/aprendices_instru.css">
+
+</head>
+
+<body>
+
+    <header id="cabezote">
+
+        <figure id="logo_sena"><img src="/static/img/logos/logo_sena.png" alt="sena"></figure>
+
+        <div class="elemento-menu"><a href="/cerrar_sesion_instru" class="boton">Cerrar sesion</a></div>
+
+    </header>
+
+    <div class="barra_menu_btn">
+
+        <a href="/home_instru"><i class="lni lni-home"></i></a>
+        <a href="/perfil_instru">Perfil</a>
+        <a href="/aprendices_instru" >Aprendices</a>
+        <a href="/obser_instru">Observaciones</a>
+
+    </div>
+
+    <!-- Contenido de la página -->
+
+    <div class="cont_contenido">
+        <h2>Lista de Aprendices</h2>
+        {%if errordatos %}
+            <h3>
+            <p>{{ errordatos }}</p>
+            </h3>
+        {% endif %}
+        <div class="contenedor_centrado">
+            <form action="/buscador_instru_apre" method="POST">
+                <input type="text" id="busca_instru_prin" name="busca_instru_prin" minlength="3" placeholder="Buscar..." required>
+                <button class="btn_buscador" type="submit">Buscar</button>
+            </form>
+        </div>
+    <div class="tabla-scroll">     
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Ficha</th>
+                    <th>Curso</th>
+                    <th>Empresa</th>
+                    <th class="tabaccion">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% if dataprendiz %}
+                {% for dato in dataprendiz %}
+                    
+                    <tr>
+                        <td>{{ dato[2] }}</td>
+                        <td>{{ dato[3] }}</td>
+                        <td>{{ dato[4] }}</td>
+                        <td>{{ dato[5] }}</td>
+                        <td>NULL</td>    
+                        <td class="tabaccion">
+                            <button id="boton-editar">
+                                <a href="/encriptar_id_detalles/{{dato[0]}}">
+                                <i class="lni lni-plus"></i>
+                                Ver detalles
+                                </a>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {%endif%}  
+                
+            </tbody>
+        </table>
+    </div>   
+    </div>
+
+</body>
+
+<div id="piepagina">
+    <!-- Contenido del footer -->
+    <p>Política de privacidad
+        Términos de servicio
+        &copy; 2023 SENA-CAB. Todos los derechos reservados.</p>
+</div>
+
+</html>

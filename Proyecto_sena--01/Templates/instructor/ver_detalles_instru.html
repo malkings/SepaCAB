@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEPA | Instructor</title>
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/globalcss_instru.css">
+    <link rel="stylesheet" href="/static/css/perfil_instru.css">
+    
+</head>
+
+<body>
+
+    <header id="cabezote">
+
+        <figure id="logo_sena"><img src="/static/img/logos/logo_sena.png" alt="sena"></figure>
+
+        <div class="elemento-menu"><a href="/cerrar_sesion_instru" class="boton">Cerrar sesion</a></div>
+
+    </header>
+
+    <div class="barra_menu_btn">
+        <a href="/home_instru"><i class="lni lni-home"></i></a>
+        <a href="/perfil_instru">Perfil</a>
+        <a href="/aprendices_instru" >Aprendices</a>
+        <a href="/obser_instru">Observaciones</a>
+    </div>
+
+    <div class="contenedor">
+        <!-- Contenido de la página -->
+        <h2>Datos personales</h2>
+
+        <h3 class="msj_error">{{mensaje}}</h3>
+
+        <h2>{{detalles_aprendiz}}</h2>
+
+        <div class="cont_contenido">
+            
+            <form action="/editar_datos_instru" method="post">
+
+                <label>Telefono</label>
+
+                <input type="text" inputmode="tel" id="nuevotelefono" name="nuevotelefono" placeholder="Ingrese nuevo contacto" pattern="3[0-9]{9}" tabindex="1" value="{{ telefono }}" required>
+            
+                <label>Correo</label>
+
+                <input type="email" inputmode="email" id="nuevocorreo" name="nuevocorreo" placeholder="Correo" tabindex="2" pattern="^[\w!#$%&'*+/=?^`{|}~-]+(?:\.[\w!#$%&'*+/=?^`{|}~-]+)*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$
+                " value="{{ correo }}" required>
+
+                <label>Cambiar contraseña</label>
+                <h6>Mínimo 8 dígitos, al menos 1 número y 1 carácter especial</h6>
+                <input type="password" inputmode="text" id="nuevaclave" name="nuevaclave" placeholder="************" pattern="^[0-9a-zA-Z!@#$%^&*()-_+=<>?.,:;]{8,20}$
+                " tabindex="3">
+                <input type="password" inputmode="text" id="nuevaclave_confirma" name="nuevaclave_confirma" placeholder="Confirma Contraseña" pattern="^[0-9a-zA-Z!@#$%^&*()-_+=<>?.,:;]{8,20}$
+                " tabindex="4">
+            
+                <button type="submit" tabindex="5">Guardar datos</button>
+                
+            </form>
+            
+        </div>
+    </div>
+
+{% if var_modal_bueno == "true" %}
+
+    <div id="myModal" class="modal" style="display: block;">
+    <div class="modal-content">
+        <span class="close"><a href="/perfil_instru">&times;</a></span>
+
+        <i class="lni lni-thumbs-up" id="icono_modal_bueno"></i>
+        <p class="cont_modal">Se han guardado los datos con exito</p>
+
+        <button class="btn_modal"><a href="/perfil_instru">Cerrar</a></button>
+    </div>
+    </div>
+
+    <script src="/static/js/perfil_instru.js"></script>
+
+{% endif %}
+
+{% if var_modal_malo == "true" %}
+
+    <div id="myModal" class="modal" style="display: block;">
+    <div class="modal-content">
+        <span class="close"><a href="/perfil_instru">&times;</a></span>
+
+        <i class="lni lni-sad" id="icono_modal_malo"></i>
+        <p class="cont_modal" id="cont_modal_malo">{{mensaje}}</p>
+
+        <button class="btn_modal"><a href="/perfil_instru">Cerrar</a></button>
+    </div>
+    </div>
+
+    <script src="/static/js/perfil_instru.js"></script>
+
+{% endif %}
+
+</body>
+
+<div id="piepagina">
+    <!-- Contenido del footer -->
+    <p>Política de privacidad
+    Términos de servicio
+    &copy; 2023 SENA-CAB. Todos los derechos reservados.</p>
+</div>
+
+</html>

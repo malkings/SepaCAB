@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+
+/* PARAMETROS */
+*{
+    box-sizing:  border-box;
+    transition: all 0.3 ease-in-out;
+}
+body, html{
+    margin:  0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
+}
+a{
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+figure img{
+
+    margin: 0;
+    width: 100%;
+
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#cabezote{ 
+
+    background-color:  #39A900;
+    height: 70px;
+    padding: 11px 17px;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+#cabezote #logo_sena, #cabezote #logo_sepa{
+
+        width: 60px;
+        margin: 0;
+
+}
+
+/*footer*/
+#piepagina {
+    position: fixed;
+    bottom: 0;
+    background-color: #333; 
+    color: #fff;
+    width: 100vw; 
+    font-size:12px;
+    height: 30px;
+    text-align: center; 
+}
+/* Estilo para los elementos del menú */
+.elemento-menu {
+    display: inline-block;
+    margin-right: 15px; 
+}
+
+/* Estilo para los botones */
+.boton {
+    background-color: #4CAF50; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* BARRA MENU */
+
+.barra_menu_btn {
+    background-color: #4CAF50; /* Verde opaco */
+    padding: 0;
+    height: 50px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.barra_menu_btn a {
+    text-decoration: none;
+    color: white;
+    padding: 12px 20px;
+    height: 40px;
+    position: relative;
+}
+
+.barra_menu_btn a:not(:last-child):after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -10px;
+    width: 1px;
+    background-color: white; /* Color de las líneas */
+    transform: skew(-20deg); /* Inclinación de las líneas */
+    transition: background-color 0.3s ease; /* Transición suave del color */
+}
+
+.barra_menu_btn a:hover:not(:last-child):after {
+    background-color: rgba(255, 255, 255, 0.5); /* Color de las líneas al pasar el cursor */
+}
+
+.barra_menu_btn a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Color de fondo al pasar el cursor */
+}
+
+.barra_menu_btn a {
+    margin-left: 15px;
+}
+
+@media screen and (max-width: 450px) {
+    #piepagina{
+        font-size: 10px;
+    }
+
+    .barra_menu_btn a {
+        padding: 12px 10px;
+    }
+}
+
+
+

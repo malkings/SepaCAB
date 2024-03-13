@@ -1,0 +1,92 @@
+*{
+    box-sizing: border-box;
+    transition: all 0.3s ease-in-out;
+
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+    figure img{
+        margin: 0;
+        width: 100%;
+    }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background: url("../images/sena_g.png") center / 80% no-repeat;
+}
+
+div, h2, h3, h4, button {
+    margin: 20px 20px 10px 20px;
+}
+
+select {
+    margin: 0 0 10px 20px;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;    
+}
+
+#content #texto {
+    background: #222;
+    color: #fff;
+    margin: 0;
+}
+
+#content #ver-cod {
+    margin: 0px 0 0 0;
+}
+
+    #texto p {
+        padding: 5px 20px;
+    }
+
+#content #version,#codigo {    
+    padding: 5px 20px;
+    margin: 0;
+}
+
+#content-form-bitacora {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#titulo-bita{
+    text-align: center;    
+}
+
+#input_bit {
+    border: 1px solid #222;
+    margin: 0 20px 0 20px;
+    size: 3em;
+}
+
+#descripcion-bita {
+    border-top: 1px solid #222;
+    display: inline-flex;    
+}
+
+#observaciones-bita input{
+    padding: 1px 200px 1px 0;
+}
+
+#recordatorio-aprend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.borde-caja {
+    border: 1px solid #222;
+}
+
+

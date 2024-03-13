@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones || Aprendiz</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aprendiz/D_notificacion_aprendiz.css') }}">
+    
+</head>
+<body>
+
+    <header id="cabecera">
+        <figure id="icono">
+            <img src="/static/img/perfil.png" alt="">
+        </figure>
+
+        <h2 id="titulo">
+            <strong>Notificaciones</strong>
+        </h2>
+
+        <button type="" id="boton-cerrar-sesion" type="">
+            <figure>
+                <img src="/static/img/cerrar-sesion.png" alt="">
+            </figure>
+
+            <p>Cerrar sesion</p>
+        </button>
+    </header>
+
+    <section id="contenedor">
+        <article id="caja-botones">
+
+            <a href="/perfil">
+                <button class="Boton_navegar" type="">
+                    <figure>
+                        <img src="/static/img/usuario.png" alt="">
+                    </figure>
+
+                    <p>Perfil</p>
+                </button>
+            </a>
+
+            <a href="/visitas">
+                <button class="Boton_navegar" type="">
+                    <figure>
+                        <img src="/static/img/visitante.png" alt="">
+                    </figure>
+
+                    <p>Visitas</p>
+                </button>
+            </a>
+
+            <a href="/notificaciones">
+                <button id="boton-notificaciones" class="Boton_navegar" type="">
+                    <figure>
+                        <img src="/static/img/notificacion.png" alt="">
+                    </figure>
+
+                    <p>Notificaciones</p>
+                </button>
+            </a>
+
+            <a href="/empresa">
+                <button class="Boton_navegar" type="">
+                    <figure>
+                        <img src="/static/img/edificio-de-oficinas.png" alt="">
+                    </figure>
+
+                    <p>Empresa asignada</p>
+                </button>
+            </a>
+
+            <a href="/bitacoras">
+                <button class="Boton_navegar" type="">
+                    <figure>
+                        <img src="/static/img/foro.png" alt="">
+                    </figure>
+
+                    <p>Bitacoras</p>
+                </button>
+            </a>
+
+        </article>
+
+        <article id="caja-notificaciones">
+            
+            {% for x in info %}
+                <div class="Cajita">
+                    <th><p class="Nombre_instructor Espaciado"><strong>De:</strong> {{x.0}}</p></th>
+
+                    <td><p class="Asunto Espaciado"><strong>Asunto:</strong> {{x.2}}</td></p>
+
+                    <td><p class="Comentario Espaciado">{{x.3}}</p></td>
+
+                    <td><p class="Fecha_envio Espaciado">{{x.1}}</p></td>
+                </div>
+            {% endfor%}
+
+        </article>
+    </section>
+</body>
+</html>

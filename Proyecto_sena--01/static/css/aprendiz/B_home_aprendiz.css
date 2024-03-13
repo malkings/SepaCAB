@@ -1,0 +1,1081 @@
+* {
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+  figure img{
+      margin: 0;
+      width: 100%;
+  }
+
+body, html{
+  margin: 0;
+  padding: 0;
+  font-family: 'calibri';
+  background: rgb(250, 250, 250);
+}
+
+@media screen and (min-width: 320px) {
+
+  /*---------- MODAL ----------*/
+
+  #content_icon{
+    position: absolute;
+    padding: 2px;
+    background: rgb(250, 250, 250);
+    border-radius: 8px;
+    transform: translate(125px, 30px);
+  }
+
+  #btn-abrir{
+    margin: 0px;
+    padding: 0px;
+    font-size: 35px;
+    color: #333;
+  }
+
+  #texto-modal{
+    padding: 0px;
+    text-align: center;
+    font-size: 22px;
+    color: rgb(250, 250, 250);
+    margin: 20px 5px 20px 0; 
+  }
+
+  #Actualizar{
+    position: relative;
+    background: #32A900;
+    border: none;
+    padding: 0px;
+    color: rgb(250, 250, 250);
+    font-size: 16px;
+    height: 5vh;
+    border-radius: 12px;
+    text-align: center;
+    width: 30vw;
+    transform: translate(10px, -8px);
+    margin: 15px 0px 0px 145px;
+  }
+
+  #btn-cerrar{
+    position: absolute;
+    background: rgb(250, 250, 250);
+    border: none;
+    padding: 4px;
+    border-radius: 10px;
+    width: 20vw;
+    font-size: 16px;
+    margin: 0px 22px 0px 35px;
+    transform: translate(-10px, -35px);
+  }
+
+  .input_datos{
+    background: rgb(250, 250, 250);
+    border: none;
+    border-radius: 8px;
+    color: #000;
+    padding: 8px;
+    width: 60vw;
+    font-size: 16px;
+    margin: 15px 25px 15px 40px;  
+  }
+
+  section#datos_peques{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  article.modal{
+    margin: 20px;
+    width: clamp(280px, 83%, 480px);
+    min-width: 50vw;
+    min-height: 40vh;
+    background: #00324D;
+    border-radius: 16px;
+}
+
+  .label-inputs{
+    padding: 0px;
+    font-size: 18px;
+    color: rgb(250, 250, 250);
+    margin-left: 40px;
+    text-align: start;
+  } 
+  
+/*---------- SUBIR FOTO APRENDIZ  ----------*/
+
+  article#subir_fotoAprend{
+    display: flex;
+    text-align: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  article input#foto_aprendiz{
+    padding: 0px;
+    margin: 0;
+    font-size: 15px;
+    width: 60vw;
+  }
+    
+/*----------  DATOS BASICOS DEL APRENDIZ  ----------*/  
+
+  #linea{
+    padding: 0;
+    display: flex;
+    margin: 0px;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    border: solid 3px #666;
+    border-radius: 12px;
+    background: #E2E2E2;
+  }
+
+  #contenedor_cc{
+    display: flex;
+  }
+
+  #datos_pequesAprend{
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #dat_cc{
+    padding: 0;
+    margin: 10px 0px 0px 4px;
+    width: 10vw;
+    font-size: 20px;
+  }
+
+  #dat_ccAprend{
+    font-size: 20px;
+    margin: 8px 0px 0px 0px;
+  }  
+
+/*----------  INICIO GENERAL  ----------*/  
+
+  h2{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+
+  a{
+    margin: 15px 10px;
+    color: rgb(250, 250, 250);
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 8px;
+    font-size: 24px;
+    background: #32A900;
+  }
+
+  label{
+    font-size: 18px;
+  }
+
+  header#inicio{
+    left: 0;
+    margin: 0;
+    padding: 12px;
+    top: 0;
+    width: 100%;
+    height: 16vh;
+    background: #32A900;
+  }
+
+  #texto{
+    color: rgb(250, 250, 250);
+    border-left: solid 3px rgb(250, 250, 250);
+    margin-left: 20px;
+    padding-left: 10px; 
+  }
+
+  #texto h2, #texto p{
+    margin: 0px;
+  }
+
+  #texto h2{
+    font-size: 21px;
+    text-align: start;
+  }
+
+  #texto p{
+    font-size: 14px;
+    color: rgb(250, 250, 250);
+  }
+
+  #inicio #content{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #inicio .logo_sena{
+      width: 100px;
+  }
+
+  #vinculo{
+    display: flex;
+    padding: 0;
+    width: 100vw;
+    justify-content: center;
+  }
+
+  #cerrar{ 
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transform: translate(40%, -80%);
+  }
+
+  #boton_cerrar{
+    padding: 0px;
+    font-size: 32px;
+    margin: 0;
+    border: none;
+    background: none;
+  }
+
+/*----------  DATOS GENERALES DEL APRENDIZ  ----------*/
+
+  section#contenedor_datos02{
+    display: grid;
+    place-items: center;
+    margin: 10px;
+    padding: 0;
+    min-width: 65vw;
+    height: 58vh;
+    background: #DCDCDC;
+    border-radius: 18px;
+  }
+
+  figure#imagen_aprend,#imagen_instructor{
+    margin: 0;
+    padding: 0;
+  }
+
+  figure#imagen_aprend,#imagen_instructor img{
+    width: 100px;
+  }
+
+  #tabla_contentAprend02{
+    margin: 8px;
+    font-size: 18px;
+  }
+
+  .cont{
+    height: 32px;
+  }
+
+/*---------- DATOS GENERALES DE INSTRUCTOR ----------*/
+
+  section#datos_instructor{
+    display: grid;
+    place-items: center;
+    margin: 10px;
+    padding: 0;
+    min-width: 85vw;
+    min-height: 40vh;
+    background: #DCDCDC;
+    border-radius: 18px;
+  }
+
+  #tabla_instructor{
+    padding: 0px;
+    margin: 0;
+  }
+
+  #marco_instructor{
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    height: 20vh;
+  }
+
+  .contentDat_instructor{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+  }
+
+  #instructor_inicio{
+    width: 80%;
+    font-size: 20px;
+    margin: 4px 0 8px 20px;
+  }
+
+  #basico{
+    margin: 2px 0 9px 20px;
+    font-size: 16px;
+    min-width: 100%;
+  }
+
+  #instructor_fin{
+    font-size: 20px;
+    min-width: 80%;
+    margin: 0 0 10px 20px;
+  }
+
+  #basicos{
+    font-size: 18px;
+    padding: 2px;
+    margin: 0 0 0 15px;
+  }
+}
+
+/*---------- PIE DE PAGINA-CONTACTO EXTRA  ----------*/
+
+  #content_footer{
+    text-align: justify;
+    margin: 0px 14px;
+    font-size: 16px;
+  }
+
+  #correo_cordinacion{
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    background: none;
+    font-size: 16px;
+    color: #000;
+    border-radius: none;
+    border-bottom: 2px solid #00324D;
+  }
+
+@media screen and (min-width: 360px) {
+
+/*---------- CABECERA ----------*/
+
+  #texto{
+    border-left: solid 3px rgb(250, 250, 250);
+    margin-left: 18px;
+    padding-left: 12px; 
+  }
+
+  #texto h2, #texto p{
+    margin: 0px;
+  }
+
+  #texto h2{
+    font-size: 26px;
+  }
+
+  #texto p{
+    font-size: 16px;
+  }
+
+  #inicio #content{
+    margin: 10px 2px 20px 25px;
+    display: flex;
+    align-items: center;
+  }
+
+  #inicio .logo_sena{
+    width: 100px;
+  }
+
+  #cerrar{ 
+    margin: 0;
+    padding: 0;
+    position: relative;
+    transform: translate(12%, -50%);
+  }
+
+  #boton_cerrar{
+    padding: 2px;
+    font-size: 34px;
+    background: none;
+  }
+
+/*---------- DATOS BASICOS DEL APRENDIZ ----------*/
+
+  #linea{
+    margin: 0px 10px;
+    width: 80vw;
+  }
+
+  #datos_pequesAprend{
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+  }
+
+  #dat_cc{
+    margin: 2px 0px 0px 4px;
+    width: 10vw;
+    font-size: 20px;
+  }
+
+  #dat_ccAprend{
+    font-size: 20px;
+    margin: 0px 0px 2px 0px;
+  }  
+
+   /*---------- MODAL ----------*/
+
+   #content_icon{
+    padding: 2px;
+    height: 35px;
+    transform: translate(130px, 45px);
+    border-radius: 16px;
+  }
+
+  #btn-abrir{
+    margin: 0px;
+    padding: 0px;
+    font-size: 32px;
+    color: #333;
+  }
+
+  #Actualizar{
+    text-align: center;
+    padding: 0;
+    height: 40px;
+    font-size: 20px;
+    transform: translate(145px, -8px);
+    margin: 15px 0px 0px 18px;
+  }
+
+  #btn-cerrar{
+    padding: 0;
+    height: 30px;
+    font-size: 20px;
+    margin: 0px 22px 0px 40px;
+    transform: translate(-10px, -40px);
+  }
+
+  #texto-modal{
+    font-size: 24px;
+  }
+
+  .input_datos{
+    padding: 8px;
+    font-size: 18px;
+  }
+
+  .label-inputs{
+    font-size: 22px;
+  } 
+
+   /*---------- DATOS GENERALES DEL APRENDIZ ----------*/
+
+  section#contenedor_datos02{
+    margin: 20px;
+    min-width: 80vw;
+  }
+
+  /*---------- DATOS GENERALES DEL INSTRUCTOR ----------*/
+
+  section#datos_instructor{
+    margin: 20px;
+    padding: 0;
+    justify-content: center;
+    min-width: 80vw;
+    min-height: 45vh;
+  }
+  
+  #instructor_inicio{
+    width: 90%;
+    font-size: 20px;
+    margin: 4px 0 8px 15px;
+  }
+
+  #marco_instructor{
+    width: 95vw;
+    margin: 0;
+    padding: 0;
+    height: 20vh;
+  }
+
+  #basico{
+    margin: 4px 0 9px 15px;
+    font-size: 17px;
+    min-width: 20vw;
+  }
+
+  #instructor_fin{
+    font-size: 18px;
+    min-width: 80vw;
+    margin: 15px 0 10px 15px;
+  }
+}
+
+@media screen and (min-width: 380px) and (max-width: 420px) {
+
+/*---------- CABECERA ----------*/
+
+  #inicio #content{
+    margin: 12px 2px 20px 25px;
+    display: flex;
+    align-items: center;
+  }
+
+  #boton_cerrar{
+    padding: 2px;
+    font-size: 34px;
+    background: none;
+  }
+
+/*---------- DATOS BASICOS DEL APRENDIZ ----------*/
+
+  #linea{
+    margin: 0px 15px;
+    width: 75vw;
+  }
+
+/*---------- MODAL ----------*/
+
+   #texto-modal{
+    font-size: 26px;
+  }
+
+  #Actualizar{
+    padding: 0px;
+    font-size: 20px;
+    height: 5.5vh;
+    transform: translate(35px, -8px);
+    margin: 15px 0px 0px 145px;
+  }
+
+  #btn-cerrar{
+    text-align: center;
+    padding: 0px;
+    height: 32px;
+    font-size: 20px;
+    margin: 0px 22px 0px 35px;
+    transform: translate(-10px, -40px);
+  }
+
+  .input_datos{
+    padding: 8px;
+    width: 60vw;
+    font-size: 18px;
+  }
+
+ .label-inputs{
+    font-size: 22px;
+  } 
+
+/*---------- DATOS GENERALES DEL APRENDIZ ----------*/
+
+  section#contenedor_datos02{
+    display: grid;
+    margin: 20px 30px;
+    min-width: 60vw;
+  }
+
+  #tabla_contentAprend02{
+    margin: 8px;
+    font-size: 22px;
+  }
+
+  .cont{
+    height: 34px;
+  }
+
+/*---------- DATOS GENERALES DEL INSTRUCTOR ----------*/
+
+  section#datos_instructor{
+    margin: 20px 30px;
+    display: grid;
+    justify-content: center;
+    min-width: 80vw;
+    min-height: 35vh;
+  }
+  
+  #instructor_inicio{
+    font-size: 26px;
+    margin: 4px 0 8px 25px;
+  }
+
+  #marco_instructor{
+    width: 95vw;
+    margin: 0;
+    padding: 0;
+    height: 25vh;
+  }
+
+  #basico{
+    margin: 4px 0 6px 25px;
+    font-size: 18px;
+    min-width: 20vw;
+  }
+
+  #instructor_fin{
+    font-size: 26px;
+    min-width: 80vw;
+    margin: 15px 0 0 25px;
+  }
+
+  #basicos{
+    font-size: 20px;
+    margin: 15px 0 0 25px;
+  }
+}
+
+@media screen and (min-width: 430px) and (max-width: 480px){
+  
+/*---------- DATOS BASICOS DEL APRENDIZ ----------*/
+
+  #linea{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+    justify-content: center;
+    height: 12vh;
+  }
+
+  #datos_pequesAprend{
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  #dat_cc{
+    margin: 10px 0px 0px 38px;
+    width: 8vw;
+    font-size: 22px;
+  }
+
+  #dat_ccAprend{
+    width: 80vw;
+    font-size: 22px;
+    margin: 6px 0px 0px 0px;
+  }  
+
+/*---------- MODAL ----------*/
+
+  #content_icon{
+    transform: translate(160px, 30px);
+  }
+
+  #texto-modal{
+    font-size: 26px;
+  }
+
+  #Actualizar{
+    padding: 0;
+    height: 6vh;
+    font-size: 20px;
+    transform: translate(160px, -8px); 
+  }
+
+  #btn-cerrar{
+    height: 5vh;
+    padding: 0;
+    font-size: 20px;
+    transform: translate(-20px, -46px); 
+  }
+
+  .input_datos{
+    padding: 8px;
+    font-size: 18px;
+    margin: 20px 5px 20px 35px;  
+  }
+
+  .label-inputs{
+    font-size: 24px;
+  } 
+
+  article.modal{
+    margin: 20px;
+    width: clamp(280px, 80%, 380px);
+  }
+
+/*---------- DATOS GENERALES DEL APRENDIZ ----------*/
+
+  section#contenedor_datos02{
+    display: grid;
+    margin: 20px 40px;
+    min-width: 40vw;
+    height: 60vh;
+  }
+
+  #tabla_contentAprend02{
+    margin: 8px;
+    font-size: 22px;
+  }
+
+  .cont{
+    height: 32px;
+  }
+
+  /*---------- DATOS GENERALES DEL INSTRUCTOR ----------*/
+
+  section#datos_instructor{
+    margin: 20px 40px;
+    display: grid;
+    justify-content: center;
+    min-width: 40vw;
+    min-height: 35vh;
+  }
+
+  #instructor_inicio{
+    font-size: 26px;
+    margin: 4px 0 8px 30px;
+  }
+
+  #marco_instructor{
+    width: 95vw;
+    margin: 0;
+    padding: 0;
+    height: 25vh;
+  }
+
+  #basico{
+    margin: 4px 0 6px 30px;
+    font-size: 20px;
+    min-width: 20vw;
+  }
+
+  #instructor_fin{
+    font-size: 26px;
+    min-width: 80vw;
+    margin: 15px 0 0 30px;
+  }
+
+  #basicos{
+    font-size: 20px;
+    margin: 15px 0 0 30px;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 540px) {
+  
+/*---------- CABECERA ----------*/
+
+ h2{
+    text-align: center;
+    font-size: 38px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a{
+    border-radius: 12px;
+    padding: 8px;
+    font-size: 28px;
+  }
+
+  #texto{
+    color: rgb(250, 250, 250);
+    border-left: solid 3px rgb(250, 250, 250);
+    margin-left: 24px;
+    padding-left: 22px; 
+  }
+
+  #texto h2{
+    font-size: 26px;
+    text-align: start;
+  }
+
+  #texto p{
+    font-size: 16px;
+    color: rgb(250, 250, 250);
+  }
+
+  #inicio #content{
+    margin: 12px 4px 10px 40px;
+    display: flex;
+    align-items: center;
+  }
+  
+  #inicio .logo_sena{
+      width: 90px;
+  }
+
+  #cerrar{ 
+    transform: translate(30%, -70%);
+  }
+
+  #boton_cerrar{
+    padding: 0px;
+    font-size: 38px;
+  }
+  
+/*---------- DATOS BASICOS DEL APRENDIZ ----------*/
+
+  #linea{
+    margin: 0px;
+    width: 72vw;
+  }
+
+  #datos_pequesAprend{
+    font-size: 20px;
+  }
+
+  #dat_cc{
+    font-size: 20px;
+  }
+
+  #dat_ccAprend{
+    font-size: 22px;
+  }  
+
+/*---------- MODAL ----------*/
+
+   #content_icon{
+    transform: translate(161px, 70%);
+    border-radius: 14px;
+    padding: 0px;
+  }
+  
+  #btn-abrir{
+    padding: 6px;
+    font-size: 38px;
+  }
+
+  #Actualizar{
+    height: 5.5vh;
+    font-size: 18px;
+    width: 30vw;
+    transform: translate(30px, 6px);
+  }
+
+  #btn-cerrar{
+    height: 5vh;
+    font-size: 18px;
+    transform: translate(-20px, -35px);
+  }
+
+  .input_datos{
+    width: 45vw;
+    font-size: 16px;
+    margin: 20px 5px 20px 5px;  
+  }
+
+  article.modal{
+    margin: 20px;
+    width: clamp(280px, 80%, 340px);
+}
+
+/*---------- DATOS GENERALES DEL APRENDIZ ----------*/
+
+  section#contenedor_datos02{
+    display: grid;
+    margin: 20px 60px;
+  }
+
+  .content_dat{
+    font-size: 22px;
+  }
+
+/*---------- DATOS GENERALES DEL INSTRUCTOR ----------*/
+
+  section#datos_instructor{
+    margin: 20px 60px;
+    display: grid;
+    justify-content: center;
+  }
+  
+  #instructor_inicio{
+    width: 80%;
+    font-size: 22px;
+    margin: 4px 0 8px 25px;
+  }
+
+  #marco_instructor{
+    width: 80vw;
+    margin: 0;
+    padding: 0;
+    height: 20vh;
+  }
+
+  #basico{
+    margin: 4px 0 9px 25px;
+    font-size: 20px;
+    min-width: 20vw;
+  }
+
+  #basicos{
+    font-size: 20px;
+    margin: 0 0 0 25px;
+  }
+
+  #instructor_fin{
+    font-size: 22px;
+    min-width: 80vw;
+    margin: 15px 0 0 25px;
+  }
+
+}
+
+@media screen and (min-width: 541px) and (max-width: 768px) {
+   
+/*---------- CABECERA ----------*/
+  
+  h2{
+    text-align: center;
+    font-size: 38px;
+    margin: 0;
+    padding: 0;
+  }
+    
+  a{
+    border-radius: 12px;
+    padding: 8px;
+    font-size: 30px;
+  }
+  
+  #texto{
+    color: rgb(250, 250, 250);
+    border-left: solid 3px rgb(250, 250, 250);
+    margin-left: 24px;
+    padding-left: 22px; 
+  }
+  
+  #texto h2{
+    font-size: 26px;
+    text-align: start;
+  }
+ 
+  #texto p{
+    font-size: 18px;
+    color: rgb(250, 250, 250);
+  }
+  
+  #inicio #content{
+    margin: 12px 28px 12px 30px;
+    display: flex;
+    align-items: center;
+  }
+   
+  #inicio .logo_sena{
+    width: 90px;
+  }
+  
+  #cerrar{ 
+    transform: translate(80%, -70%);
+  }
+  
+  #boton_cerrar{
+    padding: 0px;
+    font-size: 38px;
+  }
+    
+/*---------- DATOS BASICOS DEL APRENDIZ ----------*/
+  
+  #linea{
+    margin: 0px 20px;
+    width: 65vw;
+  }
+ 
+  #datos_pequesAprend{
+    font-size: 20px;
+  }
+  
+  #dat_cc{
+    font-size: 20px;
+  }
+  
+  #dat_ccAprend{
+    font-size: 22px;
+  }  
+  
+/*---------- MODAL ----------*/
+  
+  #content_icon{
+    transform: translate(161px, 70%);
+    border-radius: 14px;
+    padding: 0px;
+  }
+    
+  #btn-abrir{
+    padding: 6px;
+    font-size: 38px;
+  }
+  
+  #Actualizar{
+    height: 5.5vh;
+    font-size: 18px;
+    width: 30vw;
+    transform: translate(50px, 2px);
+  }
+  
+  #btn-cerrar{
+    height: 5vh;
+    font-size: 18px;
+    transform: translate(-15px, -40px);
+  }
+  
+  .input_datos{
+    width: 45vw;
+    font-size: 16px;
+    margin: 20px 5px 20px 15px;  
+  }
+  
+  article.modal{
+    margin: 20px;
+    min-height: 35vh;
+    width: clamp(280px, 85%, 380px);
+  }
+  
+/*---------- DATOS GENERALES DEL APRENDIZ ----------*/
+  
+  #contenedor_datos02{
+    width: 40vw;
+    margin: 20px 40px;
+  }
+
+  #content_datAprend02{
+    margin: 2px 5px;
+    width: 60vw;
+    border: 3px solid #32A900;
+  }
+  
+  .content_dat{
+    font-size: 22px;
+  }
+ 
+/*---------- DATOS GENERALES DEL INSTRUCTOR ----------*/
+  
+  section#datos_instructor{
+    margin: 20px 50px;
+    display: grid;
+  }
+    
+  #instructor_inicio{
+    width: 80%;
+    font-size: 22px;
+    margin: 4px 0 8px 25px;
+  }
+  
+  #marco_instructor{
+    width: 80vw;
+    margin: 0;
+    padding: 0;
+    height: 20vh;
+  }
+  
+  #basico{
+    margin: 4px 0 9px 25px;
+    font-size: 20px;
+    min-width: 20vw;
+  }
+  
+  #basicos{
+    font-size: 20px;
+    margin: 0 0 0 25px;
+  }
+  
+  #instructor_fin{
+    font-size: 22px;
+    min-width: 80vw;
+    margin: 15px 0 0 25px;
+  }
+}
+/*Pendiente------ resolucion de tablets*/

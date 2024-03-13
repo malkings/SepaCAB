@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login|SEPA</title>
+
+    <link rel="stylesheet" href="https://cdn.lineicons.com/4.0/lineicons.css" />
+
+    <link rel="stylesheet" href="/static/css/loginsepa.css">
+</head>
+<body>
+    
+    <main>
+        <section id="zona_superior">
+            <div id="cont_primero">
+                <figure id="logo_sena">
+                    <img src="/static/img/login/sena.png" alt="">
+                </figure>
+            </div>
+
+            <div id="cont_segundo">
+                <div class="Marca">
+                    <h1>SEPA/SENA-CAB</h1>
+                </div>
+
+                <div class="Marca">
+                    <p>Seguimiento de Etapa Productiva de Aprendices</p>
+                </div>
+            </div>
+        </section>
+
+        <h4 id="mensaje_error"> {{mensaje_error_ingreso}} </h4>
+
+        <h4 id="mensaje_confirma">{{mensaje_cambio_contra_bueno}}</h4>
+
+        <section id="zona_inferior">
+            <form action="/ingresa_usuario" method="POST" name="ingreso_forma" id="ingreso_forma">
+
+                <div class="Forma-Ingreso">
+                    <i class="lni lni-user"></i>                  
+                    <input type="text" name="cedulaingreso" id="cedulaingreso" placeholder="Cedula" minlength="8" maxlength="32" pattern="\d{8,}" inputmode="numeric" required tabindex="1">
+                </div>
+
+                <div class="Forma-Ingreso">
+                    <i class="lni lni-lock"></i>                    
+                    <input type="password" name="claveingreso" id="claveingreso" placeholder="Contraseña" inputmode="text" minlength="8" maxlength="20" pattern="^[0-9a-zA-Z!@#$%^&*()-_+=<>?.,:;]{8,20}$
+                    " required tabindex="2">
+
+                </div>
+
+                <div id="caja_selec">
+                    <a href="/recupera"><label for="cajita">Recuperar contraseña</label></a>
+                </div>
+
+                <button type="submit" id="btn_ingresar" tabindex="3">Ingresar</button>
+
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
