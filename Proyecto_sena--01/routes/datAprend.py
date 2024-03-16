@@ -76,16 +76,23 @@ def home_aprendiz():
         
         usuario_foto = session.get("user_foto")
         cedula = session.get("aprendiz_cedula")
-
         instructor = session.get("cedula_instructor")
 
         Dato, Datos, Datos_ins = aprendices.homeAprend(cedula, instructor)
 
         session["cedula_instructor"] = Dato[0][0]#guarda la cedula del instructor para hacer la validacion en la tabla de asignaciones
     
-        nombre_instructor = Datos[0][0]
-        apellido_instructor = Datos[0][1]
-        correo_instructor = Datos_ins[0][2]
+        if Datos:
+            nombre_instructor = Datos[0][0]
+            apellido_instructor = Datos[0][1]
+        else:
+            nombre_instructor = None
+            apellido_instructor = None
+
+        if Datos_ins:
+            correo_instructor = Datos_ins[0][2]
+        else:
+            correo_instructor = None
     
         return render_template("/aprendiz/B_home_aprendiz.html",
                                
