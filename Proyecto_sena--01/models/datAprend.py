@@ -19,25 +19,29 @@ class Aprendiz:
         Datos = self.cursor.fetchall()
         return Datos
 
-    def homeAprend(self, cedula, instructor):
+    """ def homeAprend(self, cedula, instructor):
         sql = f"SELECT  id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
         self.cursor.execute(sql)
         Dato = self.cursor.fetchall()
-
+        
         if Dato:
             sql = f"SELECT id_instructor, nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'"
             self.cursor.execute(sql)
             Datos = self.cursor.fetchall()
 
-            sql = f"SELECT * FROM usuario_instructor WHERE doc_indentidad='{instructor}'"
-            self.cursor.execute(sql)
-            Datos_ins = self.cursor.fetchall()
+            if Datos:
+                sql = f"SELECT * FROM usuario_instructor WHERE doc_indentidad='{instructor}'"
+                self.cursor.execute(sql)
+                Datos_ins = self.cursor.fetchall()
+                session["instructor"] = Dato[0][0]
         
-            return Dato, Datos, Datos_ins
+                return Dato, Datos, Datos_ins
+            else:
+                print("Error al traer datos de la tabla usuario_instructor", sql)
+        else:
+            print("Error al hacer la comparacion en la tabla asignacion")  
 
-        else: 
-            return None, None, None
-        
+        """
     """ def ActualizarAprend(self, cedula, telefono, correo):
         sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
         #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos        

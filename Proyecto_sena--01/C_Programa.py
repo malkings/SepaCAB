@@ -44,7 +44,7 @@ def ingresa_usuario():
                 datosingreso_i = cur.fetchall()
                 
                 ###aprendiz
-                sql = f"SELECT * FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
+                sql = f"SELECT doc_indentidad, clave, estado FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
                 conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
                     
                 cur = conexion.cursor()

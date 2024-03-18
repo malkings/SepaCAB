@@ -16,12 +16,10 @@ def mostrarDatos_aprendiz():
             session["usuario_nombres"] = Datos[0][2]
             session["usuario_apellidos"] = Datos[0][3]
             #En este apartado se han separado los datos para evitar confucion
-            
             session["user_municipio"] = Datos[0][4]
             session["user_direccion"] = Datos[0][5]
-            session["user_correo"] = Datos[0][6]
-            session["user_telefono"] = Datos[0][7] 
-            session["user_foto"] = Datos[0][8] 
+            session["user_telefono"] = Datos[0][6] 
+            session["user_foto"] = Datos[0][7] 
 
             return redirect('/mostrar_contrato')   
         
@@ -45,18 +43,36 @@ def mostrar_contrato():
             session["user_curso"] = Datos[0][2]
             session["user_nivel"] = Datos[0][3]
 
-            return redirect('/home_aprendiz')
+            return redirect('/datInstructor')
         else: 
             return redirect('/iniciar_sesion')        
     else: 
         return redirect('/iniciar_sesion')        
 
-#-------------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------
+#Home aprendiz -- Datos del instructor de seguimiento  
+@programa.route('/datInstructor')
+def datInstructor():
+    if session.get("logueado"):
+
+        cedula = session.get("aprendiz_cedula")
+        sql = f"SELECT id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
+
+        cursor = baseDatos.cursor()
+        cursor.execute(sql)
+        Datos = cursor.fetchall()
+
+        if Datos:
+            session["id_instructor"] = Datos[0][0]
+            return redirect('/home_aprendiz')
+        else:
+            print("Error al guardar la cedula del instructor", Datos)
+
 #Home Aprendiz-- Perfil
 @programa.route('/home_aprendiz')
 def home_aprendiz():
 
-    if session.get("logueado"):#Trae los datos de session de arriba
+    if session.get("logueado"):
         
         usuario_nombre = session.get("usuario_nombres")
         usuario_apellidos = session.get("usuario_apellidos")
@@ -71,33 +87,59 @@ def home_aprendiz():
         usuario_ficha = session.get("user_ficha")
         usuario_curso = session.get("user_curso")
         usuario_formacion = session.get("user_nivel")
-        
-        #foto del aprendiz
-        
         usuario_foto = session.get("user_foto")
+
         cedula = session.get("aprendiz_cedula")
-        instructor = session.get("cedula_instructor")
+        instructor = session.get("id_instructor")
 
-        # Inicializar instructor
-        Dato, Datos, Datos_ins = aprendices.homeAprend(cedula, instructor)
+        sql = f"SELECT id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
 
-        # Verificación y asignación de la cédula del instructor
+        cursor = baseDatos.cursor()
+        cursor.execute(sql)
+        Dato = cursor.fetchall()
+
         if Dato:
-            session["cedula_instructor"] = Dato[0][0]
-            
+            sql = f"SELECT id_instructor, nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'" 
+            cursor = baseDatos.cursor()
+            cursor.execute(sql)
+            Datos = cursor.fetchall()
 
-        # Verificación y asignación de los nombres y apellidos del instructor
-        if Datos:
-            session["nombre_instructor"] = Datos[0][1]
-            session["apellido_instructor"] = Datos[0][2]
-            nombre_instructor = session.get("nombre_instructor")
-            apellido_instructor = session.get("apellido_instructor")
+            if Datos:
+                session["nombres"] = Datos[0][1]
+                session["apellidos"] = Datos[0][2]
+
+                nombres = session.get("nombres")
+                apellidos = session.get("apellidos")
+
+                sql = f"SELECT doc_indentidad, correo FROM usuario_instructor WHERE doc_indentidad='{instructor}'"
+                cursor.execute(sql)
+                Datos_ins = cursor.fetchall()
+
+                if Datos_ins:
+                    session["correo"] = Datos_ins[0][1] 
+                    correo = session.get("correo")
+                else:
+                    raise ValueError("No se encontraron datos del instructor", sql, instructor)
+            else:
+                raise ValueError("No se encontraron datos del instructor", sql, instructor)
         else:
-            print("no funciona")
+            raise ValueError("No se encontraron datos del instructor", sql, instructor)
+        """Dato, Datos, Datos_ins = aprendices.homeAprend(cedula, instructor) 
+        print("Error al traer datos de la base de datos")
 
-        # Verificación y asignación del correo del instructor
+        if Datos:
+            nombre_instructor = Datos[0][1]
+            apellido_instructor = Datos[0][2]
+        else:
+            print("Error al tratar de guardar y obtener datos basicos del instructor")
+
+        nombre_instructor = session.get("nombre_instructor")
+        apellido_instructor = session.get("apellido_instructor")
+
         if Datos_ins:
             correo_instructor = Datos_ins[0][2]
+        else:
+            print("Error al guardar el correo del instructor")"""
 
         return render_template("/aprendiz/B_home_aprendiz.html",
                                
@@ -119,9 +161,9 @@ def home_aprendiz():
                                nivel = usuario_formacion,
 
                                #Datos Instructor
-                               NombreInstructor = nombre_instructor,
-                               ApellidosInstructor = apellido_instructor,
-                               CorreoInstructor = correo_instructor) 
+                               NombreInstructor = nombres,
+                               ApellidosInstructor = apellidos,
+                               CorreoInstructor = correo) 
 
         #En este apartado logramos que se muestren los datos requeridos en el html
     else:
