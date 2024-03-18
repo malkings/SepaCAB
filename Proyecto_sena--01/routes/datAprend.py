@@ -78,22 +78,27 @@ def home_aprendiz():
         cedula = session.get("aprendiz_cedula")
         instructor = session.get("cedula_instructor")
 
+        # Inicializar instructor
         Dato, Datos, Datos_ins = aprendices.homeAprend(cedula, instructor)
 
-        session["cedula_instructor"] = Dato[0][0]#guarda la cedula del instructor para hacer la validacion en la tabla de asignaciones
-    
-        if Datos:
-            nombre_instructor = Datos[0][0]
-            apellido_instructor = Datos[0][1]
-        else:
-            nombre_instructor = None
-            apellido_instructor = None
+        # Verificación y asignación de la cédula del instructor
+        if Dato:
+            session["cedula_instructor"] = Dato[0][0]
+            
 
+        # Verificación y asignación de los nombres y apellidos del instructor
+        if Datos:
+            session["nombre_instructor"] = Datos[0][1]
+            session["apellido_instructor"] = Datos[0][2]
+            nombre_instructor = session.get("nombre_instructor")
+            apellido_instructor = session.get("apellido_instructor")
+        else:
+            print("no funciona")
+
+        # Verificación y asignación del correo del instructor
         if Datos_ins:
             correo_instructor = Datos_ins[0][2]
-        else:
-            correo_instructor = None
-    
+
         return render_template("/aprendiz/B_home_aprendiz.html",
                                
                                #Datos Aprendiz
@@ -122,3 +127,85 @@ def home_aprendiz():
     else:
 
         return render_template('/loginsepa/loginsepa.html')
+    
+#----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#Inicio donde el aprendiz puede actualizar datos
+@programa.route('/Datos_aprendiz', methods = ['POST'])
+def Cambiar_datos_aprendiz():
+
+    if session.get("logueado"):
+        
+        cedula = session.get("usuario_cedula")
+        telefono = request.form['actualizacion_celular']
+        correo = request.form['actualizacion_correo']
+
+        sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
+        #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos        
+        
+        cursor = baseDatos.cursor()
+        cursor.execute(sql)
+
+        TomaDatos()
+
+        #Datos Aprendiz        
+        usuario_nombre = session.get("usuario_nombres")
+        usuario_apellido = session.get("usuario_apellidos")
+        usuario_id_cedula = session.get("usuario_cedula")
+        usuario_tipo_documento = session.get("usuario_tipo_doc")
+
+        usuario_foto = session.get("user_foto")
+
+        user_telefono = session.get("user_telefono2")
+        user_correo = session.get("user_correo2")
+        user_municipio = session.get("user_municipio")
+        user_dir = session.get("user_direccion")
+
+        usuario_ficha = session.get("user_ficha")
+        usuario_curso = session.get("user_curso")
+        usuario_formacion = session.get("user_nivel")
+
+        #Datos Instructor
+        nombre_instructor = session.get("nombre_instructor")
+        apellido_instructor = session.get("apellidos_instructor")
+        correo_instructor = session.get("correo_instructor")
+
+    else:
+        print("El aprendiz no esta logueado")
+
+    return render_template("/aprendiz/B_home_aprendiz.html",
+                           
+                               #Datos Aprendiz
+                               NombreAprendiz = usuario_nombre, 
+                               ApellidoAprendiz = usuario_apellido, 
+                               CedulaAprendiz = usuario_id_cedula,
+                               tipo_doc = usuario_tipo_documento,
+
+                               FotoAprendiz = usuario_foto,
+
+                               TelefonoAprendiz = user_telefono,
+                               CorreoAprendiz = user_correo,
+                               Municipio = user_municipio, 
+                               dir = user_dir, 
+
+                               Ficha = usuario_ficha,
+                               curso = usuario_curso,
+                               nivel = usuario_formacion,   
+                               
+                               #Datos Instructor
+                               NombreInstructor = nombre_instructor,
+                               ApellidosInstructor = apellido_instructor,
+                               CorreoInstructor = correo_instructor)
+
+def TomaDatos():
+
+    cedula = session.get("usuario_cedula")    
+
+    sql = f"SELECT telefono, correo FROM aprendices WHERE doc_identificacion = '{cedula}'"
+
+    cursor = baseDatos.cursor()
+    cursor.execute(sql)
+    Datos = cursor.fetchall()
+
+    session["user_telefono2"]=Datos[0][0]
+    session["user_correo2"]=Datos[0][1]    

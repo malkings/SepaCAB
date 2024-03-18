@@ -79,7 +79,7 @@ form#ingreso_forma {
     margin: 20px 0 0 0;    
 }
 
-form#ingreso_forma #cedulaingreso, #claveingreso {
+form#ingreso_forma #cedulaingreso,#correoingreso, #claveingreso {
     margin: 0 0 20px 0;
     width: 230px;
     padding: 15px;
@@ -90,7 +90,7 @@ form#ingreso_forma #cedulaingreso, #claveingreso {
 
     form#ingreso_forma #cod_recupera, #nuevaclave, #codigoingreso, #clavenueva, #claveconfirma {
         margin: 0 0 20px 0;
-            width: 230px;
+        width: 230px;
         padding: 15px;
         border: none;
         border-bottom: solid 1px var(--gris-oscuro);
@@ -102,7 +102,7 @@ form#ingreso_forma #cedulaingreso, #claveingreso {
         transform: translateY(50%);        
     }
 
-#caja_selec label{
+#caja_selec a{
     font-size: 14px;
     color: var(--azul-oscuro);
 }
@@ -131,25 +131,34 @@ form#ingreso_forma #cedulaingreso, #claveingreso {
 h4{
     text-align: center;
     color: var(--azul-oscuro);
-
 }
 
 h3{
     text-align: center;
     color: var(--azul-oscuro);
-
 }
 
 #mensaje_error{
-
     color: #dc4b4b;
-
 }
 
 #mensaje_confirma{
-
     color: #39A900;
+}
 
+
+#Verclave {
+    color: #00324D;
+    z-index: 1;
+}
+
+/* Reiniciar estilos predeterminados */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-inner-spin-button,
+input[type="password"]::-webkit-outer-spin-button {
+    display: none;
+    visibility: hidden;
 }
 
 /* ----------------------------------------------- */

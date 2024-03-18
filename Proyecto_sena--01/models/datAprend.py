@@ -8,7 +8,7 @@ class Aprendiz:
         self.cursor = self.baseDatos.cursor()#cambien conexion por baseDatos, no acepta que conexion sea de tipo cursor
 
     def mostrar(self, cedula):
-        sql = f"SELECT doc_identificacion, tipo_documento, nombres, apellidos, municipio, direccion, correo, telefono, foto_aprendiz FROM aprendices WHERE doc_identificacion = '{cedula}'"  
+        sql = f"SELECT doc_identificacion, tipo_documento, nombres, apellidos, municipio, direccion, telefono, foto_aprendiz FROM aprendices WHERE doc_identificacion = '{cedula}'"  
         self.cursor.execute(sql)
         Datos = self.cursor.fetchall()
         return Datos
@@ -25,7 +25,7 @@ class Aprendiz:
         Dato = self.cursor.fetchall()
 
         if Dato:
-            sql = f"SELECT nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'"
+            sql = f"SELECT id_instructor, nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'"
             self.cursor.execute(sql)
             Datos = self.cursor.fetchall()
 
@@ -37,5 +37,16 @@ class Aprendiz:
 
         else: 
             return None, None, None
- 
+        
+    """ def ActualizarAprend(self, cedula, telefono, correo):
+        sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
+        #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos        
+        
+        self.cursor.execute(sql)
+        Datos = self.cursor.fetchall()
+
+        return Datos"""
+
+
+
 aprendices = Aprendiz(baseDatos, programa)    

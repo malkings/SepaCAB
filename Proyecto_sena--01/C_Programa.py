@@ -23,6 +23,7 @@ def ingresa_usuario():
     claveingreso = request.form['claveingreso']
     
     patron_clave = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$')
+    patron_cedula = re.compile(r'^\d{8,}$')
     
     if (cedulaingreso)and(claveingreso):
         
@@ -31,453 +32,458 @@ def ingresa_usuario():
         
         if (patron_clave.match(claveingreso)):
             
-            sql = f"SELECT  doc_indentidad, estado, clave FROM usuario_instructor WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
-            conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-            
-            cur = conexion.cursor()
-            cur.execute(sql)
-            datosingreso = cur.fetchall()
-            cur.close()
-            conexion.close()
-            
-            if datosingreso:
-                if(datosingreso[0][1]=="activo"):
-                #es intructor
-                    if(clavecifrada == datosingreso[0][2])and(cedulaingreso == datosingreso[0][0]):
-                        #Se hace la comparacion donde la contraseña sea igual a la del input
-                        
-                        ##SE DECLARAN LAS VARIABLES SESSION DEL INSTRUCTOR   
-                            
-                        session["logueado"]=True
-                        session["instru_cedula"]=datosingreso[0][0]
-                        programa.config['PERMANENT_SESSION_LIFETIME'] = 1800 ###INICIALIZA EL TIEMPO DE SESION A 30 MIN
-                                
-                        return redirect('/home_instru')
-                else:
-                            mensaje_error_inactivo="El usuario esta inactivo"         
-                            return render_template('loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo) 
-            
-            else:
-            
-                sql = f"SELECT  * FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
+            if (patron_cedula.match(cedulaingreso)):
+                
+                ##Pregunta por los 3 roles para ver si existen
+                ##instru
+                sql = f"SELECT  doc_indentidad, estado, clave FROM usuario_instructor WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
                 conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
                 
                 cur = conexion.cursor()
                 cur.execute(sql)
-                datosingreso = cur.fetchall()
+                datosingreso_i = cur.fetchall()
+                
+                ###aprendiz
+                sql = f"SELECT * FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
+                conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                    
+                cur = conexion.cursor()
+                cur.execute(sql)
+                datosingreso_a = cur.fetchall()
+                
+                ##coordi
+                sql = f"SELECT  * FROM usuario_coordi WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
+                conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                    
+                cur = conexion.cursor()
+                cur.execute(sql)
+                datosingreso_c = cur.fetchall()
                 cur.close()
                 conexion.close()
-            
-                if datosingreso:
+                     
+                if datosingreso_i:
                     
-                    #es aprendiz
-                    
-                    if(datosingreso[0][4]=="activo"):
-                    
-                        if(clavecifrada == datosingreso[0][1])and(cedulaingreso == datosingreso[0][0]):
+                    if(datosingreso_i[0][1]=="activo"):
+                    #es intructor
+                        if(clavecifrada == datosingreso_i[0][2])and(cedulaingreso == datosingreso_i[0][0]):
                             #Se hace la comparacion donde la contraseña sea igual a la del input
-                            ##poner variables q usan en aprendiz
+                            
+                            ##SE DECLARAN LAS VARIABLES SESSION DEL INSTRUCTOR   
+                                
                             session["logueado"]=True
-                            session["aprendiz_cedula"]=datosingreso[0][0]
-                                
-                            programa.config['PERMANENT_SESSION_LIFETIME'] = 1800 ###INICIALIZA EL TIEMPO DE SESION A 30 MIN
-                                
-                            return redirect('/mostrarDatos_aprendiz')
-                        
-                        ##CREAR RUTA DEL HOME APRENDIZ
+                            session["instru_cedula"]=datosingreso_i[0][0]
+                            programa.config['PERMANENT_SESSION_LIFETIME'] = 7200 ###INICIALIZA EL TIEMPO DE SESION A 2 horas
+                                    
+                            return redirect('/home_instru')
                     else:
-                            mensaje_error_inactivo="El usuario esta inactivo"         
-                            return render_template('loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo)
-                else:
-                    
-                    sql = f"SELECT  * FROM usuario_coordi WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
-                    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                                mensaje_error_inactivo="El usuario esta inactivo"         
+                                return render_template('/loginsepa/loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo) 
                 
-                    cur = conexion.cursor()
-                    cur.execute(sql)
-                    datosingreso = cur.fetchall()
-                    cur.close()
-                    conexion.close()
-                    if datosingreso:
-                        #es coordinador
-                        if(datosingreso[0][4]=="activo"):
+                elif datosingreso_a:
                         
-                            if(clavecifrada == datosingreso[0][1])and(cedulaingreso == datosingreso[0][0]):
-                            #Se hace la comparacion donde la contraseña sea igual a la del input
-                            ##poner variables q usan en COORDINADOR
+                        #es aprendiz
+                        
+                        if(datosingreso_a[0][2]=="activo"):
+                        
+                            if(clavecifrada == datosingreso_a[0][1])and(cedulaingreso == datosingreso_a[0][0]):
+                                #Se hace la comparacion donde la contraseña sea igual a la del input
+                                ##poner variables q usan en aprendiz
                                 session["logueado"]=True
-                                session["aprendiz_nombre"]=datosingreso[0][4]
-                                session["aprendiz_cedula"]=datosingreso[0][7]
-                                session["aprendiz_telefono"]=datosingreso[0][3]
-                                session["aprendiz_area"]=datosingreso[0][5]
-                                session["aprendiz_centro"]=datosingreso[0][6]
-                                
+                                session["aprendiz_cedula"]=datosingreso_a[0][0]
+                                    
                                 programa.config['PERMANENT_SESSION_LIFETIME'] = 1800 ###INICIALIZA EL TIEMPO DE SESION A 30 MIN
-                                
-                                return redirect('/home_aprendiz')
-                                ##CREAR RUTA DEL HOME COORDINADOR
-                                
+                                    
+                                return redirect('/mostrarDatos_aprendiz')
+                            
+                            ##CREAR RUTA DEL HOME APRENDIZ
                         else:
-                            mensaje_error_inactivo="El usuario esta inactivo"         
-                            return render_template('loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo)
-                    else:
-                        mensaje_error_ingreso="El usuario no existe"         
-                        return render_template('loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)  
-                    
+                                mensaje_error_inactivo="El usuario esta inactivo"         
+                                return render_template('/loginsepa/loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo),print("Error encontrado en el apartado del aprendiz")
+                                
+                elif datosingreso_c:
+                        
+                            #es coordinador
+                            if(datosingreso_c[0][5]=="activo"):
+                            
+                                if(clavecifrada == datosingreso_c[0][1])and(cedulaingreso == datosingreso_c[0][0]):
+                                #Se hace la comparacion donde la contraseña sea igual a la del input 
+                                ##poner variables q usan en COORDINADOR
+                                    session["logueado"]=True
+                                    session["aprendiz_nombre"]=datosingreso_c[0][4]
+                                    session["aprendiz_cedula"]=datosingreso_c[0][7]
+                                    
+                                    programa.config['PERMANENT_SESSION_LIFETIME'] = 28800 ###INICIALIZA EL TIEMPO DE SESION A 8 horas
+                                    
+                                    return redirect('/home_aprendiz')
+                                    ##CREAR RUTA DEL HOME COORDINADOR
+                                    
+                            else:
+                                mensaje_error_inactivo="El usuario esta inactivo"         
+                                return render_template('/loginsepa/loginsepa.html', mensaje_error_inactivo=mensaje_error_inactivo)
+                else:
+                    mensaje_error_ingreso="El usuario no existe o la contraseña no es correcta!"         
+                    return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)  
+            else:
+                mensaje_error_ingreso="Cedula no valida!"
+                return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso),print("Error encontrado en la cedula")
         else:
-            mensaje_error_ingreso="Contraseña no valida"
-            return render_template('loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+            mensaje_error_ingreso="Contraseña no valida!"
+            return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
     else:
-        mensaje_error_ingreso="Contraseña o correo no ingresado"
-        return render_template('loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
-
+        mensaje_error_ingreso="Contraseña o correo no ingresado!"
+        return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+    
 ###########################RECUPERA CONTRASEÑA--------------------------------------------------------
 
 @programa.route('/recupera')
 def recupera():
-    return render_template ("envia_correo.html")
-        
-################ENVIA CORREO--------------------------------------------------------------------------
+    return render_template ("/loginsepa/envia_correo.html")
+
+################ENVIA CORREO-------------------------------------------------------------------------
 
 @programa.route('/envia_correo', methods=['POST'])
 def enviar_correo():
     
     destinatario = request.form['correoingreso']
     
-    ##REVISAR SI CORREO EXISTE EN BASE DE DATOS:
-    sql = f"SELECT doc_identidad,fecha_ultimo_cambio,correo FROM usuario_instru WHERE correo = '{destinatario}' AND estado='activo'"
-    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-            
-    cur = conexion.cursor()
-    cur.execute(sql)
-    datexiten_instru = cur.fetchall()
-    cur.close()
-    conexion.close()
+    patron_correo = re.compile(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
     
-    if datexiten_instru:
-        ##ES INSTRU
-        # Obtener la fecha de la base de datos
-
-        sql = f"SELECT fecha_ultimo_cambio FROM usuario_instructor WHERE correo = '{destinatario}'"
-
+    if patron_correo.match(destinatario):
+        
+        ##REVISAR SI CORREO EXISTE EN BASE DE DATOS:
+        ## INSTRU
+        sql = f"SELECT doc_indentidad,correo FROM usuario_instructor WHERE correo = '{destinatario}' AND estado='activo'"
         conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+        
         cur = conexion.cursor()
         cur.execute(sql)
-        fecha = cur.fetchone()
+        datexiten_instru = cur.fetchall()
         cur.close()
         conexion.close()
-        fecha_ingreso = datetime.strptime(fecha[0], '%Y-%m-%d')
-        # sumar un mes a la fecha de la base de datos
-        fecha_un_mes_mas = fecha_ingreso + timedelta(days=30)
-        #obtiene la fecha actual
-        fecha_actual = datetime.now()
-        # Verificar si la fecha actual es mayor a la fecha de la bd mas un mes    
-        if fecha_actual > fecha_un_mes_mas:
-            
-            cedula = datexiten_instru[0][0]
-            asunto = "Recuperacion de contraseña SEPA/CAB"
-            servidor_smtp = "smtp.gmail.com"
-            puerto_smtp = 587
-            usuario_smtp = "Sepacap2024@gmail.com"
-            contraseña_smtp = "kdcg jmxs kduz tgtn"
-            mensaje = MIMEMultipart()
-            mensaje['From'] = usuario_smtp
-            mensaje['To'] = destinatario
-            mensaje['Subject'] = asunto
-            
-            ##GENERA CLAVE ALEATORIAS
-            longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
-            caracteres = string.ascii_letters + string.digits + string.punctuation
-            clave_generada = ''
-            while True:
-                clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
-                if (any(c.islower() for c in clave_generada)
-                    and any(c.isupper() for c in clave_generada)
-                    and any(c.isdigit() for c in clave_generada)
-                    and any(c in string.punctuation for c in clave_generada)):
-                    break
-            # Cifrar contraseña
-            
-            clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
-            mensaje.attach(MIMEText(f"Usuario con numero de documento({cedula}),\n\nTu nueva contraseña es: {clave_envia_cifrada}",'plain'))
-                #logo_path = "/static/img/logos/logo_sepa_sinfondo.png"
-                #with open(logo_path, 'rb') as logo_file:
-                    #logo_mime = MIMEImage(logo_file.read(), name="logo.png")
-                    #mensaje.attach(logo_mime)
-            try:
-                    with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
-                        servidor.starttls()
-                        servidor.login(usuario_smtp, contraseña_smtp)
-                        cuerpo_correo = mensaje.as_string()
-                        servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
-                    sql = f"UPDATE `usuario_instru` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_instru`.`correo` = '{destinatario}'"
-                    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-                    cur = conexion.cursor()
-                    cur.execute(sql)
-                    conexion.commit()
-                    cur.close()
-                    conexion.close()
-                    mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
-                    return render_template('/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
-                    
-            except Exception as e:
-                    mensaje_error = f"Error al enviar el correo: {e}"
-                    return render_template('envia_correo.html', mensaje_error=mensaje_error)
-        else:
-            mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
-            return render_template('/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
-            
-    else:
         
-            sql = f"SELECT doc_identidad,fecha_ultimo_cambio,correo FROM usuario_aprendiz WHERE correo = '{destinatario}' AND estado='activo'"
+        ######Aprendiz
+        
+        sql = f"SELECT doc_indentidad,correo FROM usuario_aprendiz WHERE correo = '{destinatario}' AND estado='activo'"
+        conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+        
+        cur = conexion.cursor()
+        cur.execute(sql)
+        datexiten_aprendiz = cur.fetchall()
+        cur.close()
+        conexion.close()
+        
+        #########COORDI
+        
+        sql = f"SELECT doc_indentidad,correo FROM usuario_coordi WHERE correo = '{destinatario}' AND estado='activo'"
+        conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+        
+        cur = conexion.cursor()
+        cur.execute(sql)
+        datexiten_coordi = cur.fetchall()
+        cur.close()
+        conexion.close()
+        
+        if len(datexiten_instru) > 0:
+            ##ES INSTRU
+            # Obtener la fecha de la base de datos
+            sql = f"SELECT fecha_ultimo_cambio, doc_indentidad FROM usuario_instructor WHERE correo = '{destinatario}'"
             conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-                
             cur = conexion.cursor()
             cur.execute(sql)
-            datexiten_aprendiz = cur.fetchall()
-            cur.close()
-            conexion.close()
-        
-            if datexiten_aprendiz:
-                ##ES APRENDIZ
+            fecha_base_datos = cur.fetchall()
+            
+            fechabd_str = fecha_base_datos[0][0]
+            fechabd = datetime.strptime(fechabd_str, '%Y-%m-%d')
+
+            # Obtener la fecha actual
+            fecha_actual = datetime.now()
+
+            # Sumar exactamente 30 días a la fecha de la base de datos simulada
+            fecha_30_dias_despues = fechabd + timedelta(days=30)
+            
+            # Verificar si la fecha actual es igual o mayor a la fecha guardada bd
+            if fecha_actual >= fecha_30_dias_despues:
+                ##dejara al usuario cambiar su contraseña automaticamente, enviandolo al correo
                 
-                # Obtener la fecha de la base de datos
-
-                sql = f"SELECT fecha_ultimo_cambio FROM usuario_aprendiz WHERE correo = '{destinatario}'"
-
+                cedula = datexiten_instru[0][0]
+                asunto = "Recuperacion de contraseña SEPA/CAB"
+                servidor_smtp = "smtp.gmail.com"
+                puerto_smtp = 587
+                usuario_smtp = "Sepacap2024@gmail.com"
+                contraseña_smtp = "kdcg jmxs kduz tgtn"
+                mensaje = MIMEMultipart()
+                mensaje['From'] = usuario_smtp
+                mensaje['To'] = destinatario
+                mensaje['Subject'] = asunto
+                
+                ##GENERA CLAVE ALEATORIAS
+                longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
+                caracteres = string.ascii_letters + string.digits + string.punctuation
+                clave_generada = ''
+                while True:
+                    clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
+                    if (any(c.islower() for c in clave_generada)
+                        and any(c.isupper() for c in clave_generada)
+                        and any(c.isdigit() for c in clave_generada)
+                        and any(c in string.punctuation for c in clave_generada)):
+                        break
+                
+                ##TRAER DATOS PERSONALES
+                sql = f"SELECT nombres, apellidos FROM datos_instructor WHERE id_instructor = '{cedula}'"
                 conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
                 cur = conexion.cursor()
                 cur.execute(sql)
-                fecha = cur.fetchone()
-                cur.close()
-                conexion.close()
-                fecha_ingreso = datetime.strptime(fecha[0], '%Y-%m-%d')
-                # sumar un mes a la fecha de la base de datos
-                fecha_un_mes_mas = fecha_ingreso + timedelta(days=30)
-                #obtiene la fecha actual
-                fecha_actual = datetime.now()
-                # Verificar si la fecha actual es mayor a la fecha de la bd mas un mes    
-                if fecha_actual > fecha_un_mes_mas:
-                    
-                    cedula = datexiten_aprendiz[0][0]
-                    asunto = "Recuperacion de contraseña SEPA/CAB"
-                    servidor_smtp = "smtp.gmail.com"
-                    puerto_smtp = 587
-                    usuario_smtp = "Sepacap2024@gmail.com"
-                    contraseña_smtp = "kdcg jmxs kduz tgtn"
-                    mensaje = MIMEMultipart()
-                    mensaje['From'] = usuario_smtp
-                    mensaje['To'] = destinatario
-                    mensaje['Subject'] = asunto
-                    
-                    ##GENERA CLAVE ALEATORIAS
-                    longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
-                    caracteres = string.ascii_letters + string.digits + string.punctuation
-                    clave_generada = ''
-                    while True:
-                        clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
-                        if (any(c.islower() for c in clave_generada)
-                            and any(c.isupper() for c in clave_generada)
-                            and any(c.isdigit() for c in clave_generada)
-                            and any(c in string.punctuation for c in clave_generada)):
-                            break
-                    # Cifrar contraseña
-                    
-                    clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
-                    mensaje.attach(MIMEText(f"Usuario con numero de documento({cedula}),\n\nTu nueva contraseña es: {clave_envia_cifrada}",'plain'))
-                        #logo_path = "/static/img/logos/logo_sepa_sinfondo.png"
-                        #with open(logo_path, 'rb') as logo_file:
-                            #logo_mime = MIMEImage(logo_file.read(), name="logo.png")
-                            #mensaje.attach(logo_mime)
-                    try:
-                            with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
-                                servidor.starttls()
-                                servidor.login(usuario_smtp, contraseña_smtp)
-                                cuerpo_correo = mensaje.as_string()
-                                servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
-                            sql = f"UPDATE `usuario_aprendiz` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_aprendiz`.`correo` = '{destinatario}'"
-                            conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-                            cur = conexion.cursor()
-                            cur.execute(sql)
-                            conexion.commit()
-                            cur.close()
-                            conexion.close()
-                            mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
-                            return render_template('/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
-                            
-                    except Exception as e:
-                            mensaje_error = f"Error al enviar el correo: {e}"
-                            return render_template('envia_correo.html', mensaje_error=mensaje_error)
-                else:
-                    mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
-                    return render_template('/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+                datos_instru = cur.fetchall()
+                nombre = datos_instru[0][0]
+                apellido = datos_instru[0][1]
                 
-            else:
-                
-                    sql = f"SELECT doc_identidad,fecha_ultimo_cambio,correo FROM usuario_coordi WHERE correo = '{destinatario}' AND estado='activo'"
-                    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-                    
-                    cur = conexion.cursor()
-                    cur.execute(sql)
-                    datexiten_coordi = cur.fetchall()
-                    cur.close()
-                    conexion.close()
-                    
-                    if datexiten_coordi:
-                    
-                    ##ES COORDINADOR
-                    
-                        # Obtener la fecha de la base de datos
+                # Cifrar contraseña
+                clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
+                # Crear el cuerpo del mensaje en formato HTML
+                cuerpo_html = f"""
+                <html>
+                <body>
+                <h2 style="color: black;>Recuperación de contraseña SEPA/CAB</h2>
+                <p style="color: black;>{nombre} {apellido},</p>
+                <p>Usuario con número de documento ({cedula}),</p>
+                <p>Su nueva contraseña es: <strong>{clave_generada}</strong></p>
+                <img src="cid:logo" width="200" height="auto"> <!-- Este es el identificador para referenciar el logo -->
+                </body>
+                </html>
+                """
+                mensaje.attach(MIMEText(cuerpo_html, 'html'))
 
-                        sql = f"SELECT fecha_ultimo_cambio FROM usuario_coordi WHERE correo = '{destinatario}'"
-
+                # Adjuntar el logo como una parte del correo electrónico
+                with open(os.path.join(programa.root_path, 'static', 'imagenes', 'login', 'sena.png'), 'rb') as f:
+                    logo = MIMEImage(f.read(), name='logo.png')
+                    logo.add_header('Content-ID', '<logo>')  # Asignar un identificador al logo
+                mensaje.attach(logo)
+                    
+                try:
+                        with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
+                            servidor.starttls()
+                            servidor.login(usuario_smtp, contraseña_smtp)
+                            cuerpo_correo = mensaje.as_string()
+                            servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
+                        sql = f"UPDATE `usuario_instructor` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_instructor`.`correo` = '{destinatario}'"
                         conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
                         cur = conexion.cursor()
                         cur.execute(sql)
-                        fecha = cur.fetchone()
+                        conexion.commit()
                         cur.close()
                         conexion.close()
-                        fecha_ingreso = datetime.strptime(fecha[0], '%Y-%m-%d')
-                        # sumar un mes a la fecha de la base de datos
-                        fecha_un_mes_mas = fecha_ingreso + timedelta(days=30)
-                        #obtiene la fecha actual
-                        fecha_actual = datetime.now()
-                        # Verificar si la fecha actual es mayor a la fecha de la bd mas un mes    
-                        if fecha_actual > fecha_un_mes_mas:
-                            
-                            cedula = datexiten_coordi[0][0]
-                            
-                            asunto = "Recuperacion de contraseña SEPA/CAB"
-                            servidor_smtp = "smtp.gmail.com"
-                            puerto_smtp = 587
-                            usuario_smtp = "Sepacap2024@gmail.com"
-                            contraseña_smtp = "kdcg jmxs kduz tgtn"
-                            mensaje = MIMEMultipart()
-                            mensaje['From'] = usuario_smtp
-                            mensaje['To'] = destinatario
-                            mensaje['Subject'] = asunto
-                            
-                            ##GENERA CLAVE ALEATORIAS
-                            longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
-                            caracteres = string.ascii_letters + string.digits + string.punctuation
-                            clave_generada = ''
-                            while True:
-                                clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
-                                if (any(c.islower() for c in clave_generada)
-                                    and any(c.isupper() for c in clave_generada)
-                                    and any(c.isdigit() for c in clave_generada)
-                                    and any(c in string.punctuation for c in clave_generada)):
-                                    break
-                            # Cifrar contraseña
-                            
-                            clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
-                            mensaje.attach(MIMEText(f"Usuario con numero de documento({cedula}),\n\nTu nueva contraseña es: {clave_envia_cifrada}",'plain'))
-                                #logo_path = "/static/img/logos/logo_sepa_sinfondo.png"
-                                #with open(logo_path, 'rb') as logo_file:
-                                    #logo_mime = MIMEImage(logo_file.read(), name="logo.png")
-                                    #mensaje.attach(logo_mime)
-                            try:
-                                    with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
-                                        servidor.starttls()
-                                        servidor.login(usuario_smtp, contraseña_smtp)
-                                        cuerpo_correo = mensaje.as_string()
-                                        servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
-                                    sql = f"UPDATE `usuario_coordi` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_coordi`.`correo` = '{destinatario}'"
-                                    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
-                                    cur = conexion.cursor()
-                                    cur.execute(sql)
-                                    conexion.commit()
-                                    cur.close()
-                                    conexion.close()
-                                    
-                                    mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
-                                    return render_template('/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
-                                    
-                            except Exception as e:
-                                    mensaje_error = f"Error al enviar el correo: {e}"
-                                    return render_template('envia_correo.html', mensaje_error=mensaje_error)
-                        else:
-                            mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
-                            return render_template('/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+                        mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
+                        cur.close()
+                        conexion.close()
+                        return render_template('/loginsepa/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
+                        
+                except Exception as e:
+                        mensaje_error = f"Error al enviar el correo: {e}"
+                        return render_template('/loginsepa/envia_correo.html', mensaje_error=mensaje_error)
                     
-                    else: 
+            elif fecha_actual < fecha_30_dias_despues:
+                mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
+                return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+                
+        elif len(datexiten_aprendiz) > 0:
+                    ##ES APRENDIZ
                     
-                        mensaje_error="Correo no existe o tu usuario esta inactivo"
-                        return render_template('loginsepa.html',mensaje_error=mensaje_error) 
-    
-#-----------------------------------------------------------------------------------# 
-
-#----------------------------------------------------------------------------------------------------------------------------------------------------------------
-#Inicio donde el aprendiz puede actualizar datos
-@programa.route('/Datos_aprendiz', methods = ['POST'])
-def Cambiar_datos_aprendiz():
-
-    if session.get("logueado"):
-        
-        cedula = session.get("usuario_cedula")
-        telefono = request.form['actualizacion_celular']
-        correo = request.form['actualizacion_correo']
-
-        sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
-        #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos
-
-        cursor = baseDatos.cursor()
-        
-        cursor.execute(sql)
-
-        TomaDatos()
-
-        #Datos Aprendiz        
-        usuario_nombre = session.get("usuario_nombres")
-        usuario_apellido = session.get("usuario_apellidos")
-        usuario_id_cedula = session.get("usuario_cedula")
-        usuario_tipo_documento = session.get("usuario_tipo_doc")
-
-        user_telefono = session.get("user_telefono2")
-        user_correo = session.get("user_correo2")
-       
-        user_municipio = session.get("user_municipio")
-        user_dir = session.get("user_direccion")
-
-        #Datos Instructor
-        nombres_instructor = session.get("nombre_instructor")
-        apellido_instructor = session.get("apellidos_instructor")
-        correo_instructor = session.get("correo_instructor")
-
+                    # Obtener la fecha de la base de datos
+                    sql = f"SELECT fecha_ultimo_cambio, doc_indentidad FROM usuario_aprendiz WHERE correo = '{destinatario}'"
+                    conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                    cur = conexion.cursor()
+                    cur.execute(sql)
+                    fecha_base_datos = cur.fetchall()
+                    cur.close()
+                    conexion.close()
+                    
+                    fechabd_str = fecha_base_datos[0][0]
+                    fechabd = datetime.strptime(fechabd_str, '%Y-%m-%d')
+                    
+                    # Obtener la fecha actual
+                    fecha_actual = datetime.now()
+                    # Sumar exactamente 30 días a la fecha de la base de datos simulada
+                    fecha_30_dias_despues = fechabd + timedelta(days=30)
+                    # Verificar si la fecha actual es igual o mayor a la fecha guardada bd
+                    if fecha_actual >= fecha_30_dias_despues:
+                        
+                        cedula = datexiten_aprendiz[0][0]
+                        asunto = "Recuperacion de contraseña SEPA/CAB"
+                        servidor_smtp = "smtp.gmail.com"
+                        puerto_smtp = 587
+                        usuario_smtp = "Sepacap2024@gmail.com"
+                        contraseña_smtp = "kdcg jmxs kduz tgtn"
+                        mensaje = MIMEMultipart()
+                        mensaje['From'] = usuario_smtp
+                        mensaje['To'] = destinatario
+                        mensaje['Subject'] = asunto
+                        
+                        ##GENERA CLAVE ALEATORIAS
+                        longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
+                        caracteres = string.ascii_letters + string.digits + string.punctuation
+                        clave_generada = ''
+                        while True:
+                            clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
+                            if (any(c.islower() for c in clave_generada)
+                                and any(c.isupper() for c in clave_generada)
+                                and any(c.isdigit() for c in clave_generada)
+                                and any(c in string.punctuation for c in clave_generada)):
+                                break
+                            
+                        ##TRAER DATOS PERSONALES
+                        sql = f"SELECT nombres, apellidos FROM aprendices WHERE doc_identificacion = '{cedula}'"
+                        conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                        cur = conexion.cursor()
+                        cur.execute(sql)
+                        datos_aprendiz = cur.fetchall()
+                        nombre = datos_aprendiz[0][0]
+                        apellido = datos_aprendiz[0][1]
+                        
+                        # Cifrar contraseña
+                        clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
+                        # Crear el cuerpo del mensaje en formato HTML
+                        cuerpo_html = f"""
+                        <html>
+                        <body>
+                        <h2 style="color: black;>Recuperación de contraseña SEPA/CAB</h2>
+                        <p style="color: black;>{nombre} {apellido},</p>
+                        <p>Usuario con número de documento ({cedula}),</p>
+                        <p>Su nueva contraseña es: <strong>{clave_generada}</strong></p>
+                        <img src="cid:logo" width="200" height="auto"> <!-- Este es el identificador para referenciar el logo -->
+                        </body>
+                        </html>
+                        """
+                        mensaje.attach(MIMEText(cuerpo_html, 'html'))
+                        # Adjuntar el logo como una parte del correo electrónico
+                        with open(os.path.join(programa.root_path, 'static', 'imagenes', 'login', 'sena.png'), 'rb') as f:
+                            logo = MIMEImage(f.read(), name='logo.png')
+                            logo.add_header('Content-ID', '<logo>')  # Asignar un identificador al logo
+                        mensaje.attach(logo)
+                        
+                        try:
+                                with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
+                                    servidor.starttls()
+                                    servidor.login(usuario_smtp, contraseña_smtp)
+                                    cuerpo_correo = mensaje.as_string()
+                                    servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
+                                sql = f"UPDATE `usuario_aprendiz` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_aprendiz`.`correo` = '{destinatario}'"
+                                conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                                cur = conexion.cursor()
+                                cur.execute(sql)
+                                conexion.commit()
+                                cur.close()
+                                conexion.close()
+                                mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
+                                return render_template('/loginsepa/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
+                                
+                        except Exception as e:
+                                mensaje_error = f"Error al enviar el correo: {e}"
+                                return render_template('/loginsepa/envia_correo.html', mensaje_error=mensaje_error)
+                            
+                    elif fecha_actual < fecha_30_dias_despues:
+                        mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
+                        return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+                    
+        elif len(datexiten_coordi) > 0:
+                        
+                        ##ES COORDINADOR
+                        
+                            # Obtener la fecha de la base de datos
+                            sql = f"SELECT fecha_ultimo_cambio, doc_indentidad FROM usuario_coordi WHERE correo = '{destinatario}'"
+                            conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                            cur = conexion.cursor()
+                            cur.execute(sql)
+                            fecha_base_datos = cur.fetchall()
+                            cur.close()
+                            conexion.close()
+                            fechabd_str = fecha_base_datos[0][0]
+                            fechabd = datetime.strptime(fechabd_str, '%Y-%m-%d')
+                            
+                            # Obtener la fecha actual
+                            fecha_actual = datetime.now()
+                            # Sumar exactamente 30 días a la fecha de la base de datos simulada
+                            fecha_30_dias_despues = fechabd + timedelta(days=30)
+                            # Verificar si la fecha actual es igual o mayor a la fecha guardada bd
+                            if fecha_actual >= fecha_30_dias_despues:
+                                
+                                cedula = datexiten_coordi[0][0]
+                                
+                                asunto = "Recuperacion de contraseña SEPA/CAB"
+                                servidor_smtp = "smtp.gmail.com"
+                                puerto_smtp = 587
+                                usuario_smtp = "Sepacap2024@gmail.com"
+                                contraseña_smtp = "kdcg jmxs kduz tgtn"
+                                mensaje = MIMEMultipart()
+                                mensaje['From'] = usuario_smtp
+                                mensaje['To'] = destinatario
+                                mensaje['Subject'] = asunto
+                                
+                                ##GENERA CLAVE ALEATORIAS
+                                longitud = random.randint(8, 10)  # Longitud aleatoria entre 8 y 10 caracteres
+                                caracteres = string.ascii_letters + string.digits + string.punctuation
+                                clave_generada = ''
+                                while True:
+                                    clave_generada = ''.join(random.choice(caracteres) for i in range(longitud))
+                                    if (any(c.islower() for c in clave_generada)
+                                        and any(c.isupper() for c in clave_generada)
+                                        and any(c.isdigit() for c in clave_generada)
+                                        and any(c in string.punctuation for c in clave_generada)):
+                                        break
+                                
+                                # Cifrar contraseña
+                                clave_envia_cifrada = hashlib.pbkdf2_hmac('sha256', clave_generada.encode('utf-8'), b'saltsupersegura', 100000).hex()
+                                # Crear el cuerpo del mensaje en formato HTML
+                                cuerpo_html = f"""
+                                <html>
+                                <body>
+                                <h2 style="color: black;>Recuperación de contraseña SEPA/CAB</h2>
+                                <p style="color: black;>Coordinador/ar,</p>
+                                <p>Usuario con número de documento ({cedula}),</p>
+                                <p>Su nueva contraseña es: <strong>{clave_generada}</strong></p>
+                                <img src="cid:logo" width="200" height="auto"> <!-- Este es el identificador para referenciar el logo -->
+                                </body>
+                                </html>
+                                """
+                                mensaje.attach(MIMEText(cuerpo_html, 'html'))
+                                
+                                # Adjuntar el logo como una parte del correo electrónico
+                                with open(os.path.join(programa.root_path, 'static', 'imagenes', 'login', 'sena.png'), 'rb') as f:
+                                    logo = MIMEImage(f.read(), name='logo.png')
+                                    logo.add_header('Content-ID', '<logo>')  # Asignar un identificador al logo
+                                mensaje.attach(logo)
+                                try:
+                                        with smtplib.SMTP(host=servidor_smtp, port=puerto_smtp) as servidor:
+                                            servidor.starttls()
+                                            servidor.login(usuario_smtp, contraseña_smtp)
+                                            cuerpo_correo = mensaje.as_string()
+                                            servidor.sendmail(usuario_smtp, destinatario, cuerpo_correo)
+                                        sql = f"UPDATE `usuario_coordi` SET `clave` = '{clave_envia_cifrada}' WHERE `usuario_coordi`.`correo` = '{destinatario}'"
+                                        conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
+                                        cur = conexion.cursor()
+                                        cur.execute(sql)
+                                        conexion.commit()
+                                        cur.close()
+                                        conexion.close()
+                                        
+                                        mensaje_cambio_contra_bueno = "Su Contraseña ha sido cambiada con exito."
+                                        return render_template('/loginsepa/loginsepa.html', mensaje_cambio_contra_bueno=mensaje_cambio_contra_bueno)
+                                        
+                                except Exception as e:
+                                        mensaje_error = f"Error al enviar el correo: {e}"
+                                        return render_template('/loginsepa/envia_correo.html', mensaje_error=mensaje_error)
+                                    
+                            elif fecha_actual < fecha_30_dias_despues:
+                                mensaje_error_ingreso = "Upss...no puedes cambiar la contraseña mas de una vez al mes."
+                                return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)
+        else: 
+            mensaje_error_ingreso="Correo no existe o tu usuario esta inactivo!"
+            return render_template('/loginsepa/loginsepa.html',mensaje_error_ingreso=mensaje_error_ingreso)
     else:
-        print("El aprendiz no esta logueado")
-
-    return render_template("/aprendiz/B_home_aprendiz.html",
-                           
-                               #Datos Aprendiz
-                               NombreAprendiz = usuario_nombre, 
-                               ApellidoAprendiz = usuario_apellido, 
-                               CedulaAprendiz = usuario_id_cedula,
-                               tipo_doc = usuario_tipo_documento,
-
-                               TelefonoAprendiz = user_telefono,
-                               CorreoAprendiz = user_correo,
-                               Municipio = user_municipio, 
-                               dir = user_dir,    
-                               
-                               #Datos Instructor
-                               NombreInstructor = nombres_instructor,
-                               ApellidosInstructor = apellido_instructor,
-                               CorreoInstructor = correo_instructor)
-
-def TomaDatos():
-
-    cedula = session.get("usuario_cedula")    
-
-    sql = f"SELECT telefono, correo FROM aprendices WHERE doc_identificacion = '{cedula}'"
-
-    cursor = baseDatos.cursor()
-    cursor.execute(sql)
-    Datos = cursor.fetchall()
-
-    session["user_telefono2"]=Datos[0][0]
-    session["user_correo2"]=Datos[0][1]
-
+        
+        mensaje_error_ingreso = "Upss... correo invalido!"
+        return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)    
+        
+    
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #Subir foto del aprendiz

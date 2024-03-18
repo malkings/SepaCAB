@@ -15,7 +15,7 @@
         <section id="zona_superior">
             <div id="cont_primero">
                 <figure id="logo_sena">
-                    <img src="/static/images/sena.png" alt="">
+                    <img src="../../static/images/login/sena.png" alt="">
                 </figure>
             </div>
 
@@ -32,7 +32,7 @@
 
         <h4>Ingresa tu correo registrado en SEPA</h4>
 
-        <h3 id="mensaje_error">{{mensaje_error}}</h3>
+        <h3 id="mensaje_error">{{ mensaje_error }}</h3>
 
         <section id="zona_inferior">
             
@@ -41,7 +41,7 @@
                 <div class="Forma-Ingreso">
                     <i class="lni lni-user"></i>                  
                     <input type="email" name="correoingreso" id="correoingreso" placeholder="Correo" minlength="10" maxlength="32"
-                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                     inputmode="email" required tabindex="1">
 
                 </div>
@@ -51,6 +51,7 @@
             </form>
         </section>
     </main>
+
 
 </body>
 </html>
