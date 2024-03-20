@@ -1,7 +1,6 @@
 from B_Conexion import *
 from routes.datAprend import mostrarDatos_aprendiz
 
-
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 @programa.route('/upload/<nombre>')
@@ -13,7 +12,6 @@ def upload(nombre):
 def index():
     return render_template('/loginsepa/loginsepa.html')
     #Ruta en la que inicia el html
-
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #INGRESO LOGIN -----------------------------------------------------

@@ -124,22 +124,6 @@ def home_aprendiz():
                 raise ValueError("No se encontraron datos del instructor", sql, instructor)
         else:
             raise ValueError("No se encontraron datos del instructor", sql, instructor)
-        """Dato, Datos, Datos_ins = aprendices.homeAprend(cedula, instructor) 
-        print("Error al traer datos de la base de datos")
-
-        if Datos:
-            nombre_instructor = Datos[0][1]
-            apellido_instructor = Datos[0][2]
-        else:
-            print("Error al tratar de guardar y obtener datos basicos del instructor")
-
-        nombre_instructor = session.get("nombre_instructor")
-        apellido_instructor = session.get("apellido_instructor")
-
-        if Datos_ins:
-            correo_instructor = Datos_ins[0][2]
-        else:
-            print("Error al guardar el correo del instructor")"""
 
         return render_template("/aprendiz/B_home_aprendiz.html",
                                
@@ -167,9 +151,7 @@ def home_aprendiz():
 
         #En este apartado logramos que se muestren los datos requeridos en el html
     else:
-
         return render_template('/loginsepa/loginsepa.html')
-    
 #----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #Inicio donde el aprendiz puede actualizar datos

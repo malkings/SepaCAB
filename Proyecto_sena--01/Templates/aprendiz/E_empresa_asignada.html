@@ -13,32 +13,23 @@
 <body>
     
     <header id="inicio">
-        
         <article id="content">
-
             <figure class="logo_sena">
 
                 <img src="../static/images/sena_w.png" alt="">
-
             </figure>
 
             <div id="texto">
-
                 <h2>SEPA</h2>
-
                 <p>Seguimiento de Etapa Productiva de Aprendices</p>
-
             </div>
-
             <div id="cerrar">
-
                 <i class="lni lni-exit" id="boton_cerrar"></i>
             </div>
         </article>
     </header>
 
     <main id="menu">
-
         <section class="Actualizar_datos_empresa">
 
             <article id="vinculo">
@@ -69,9 +60,7 @@
                 </a>
     
             </article>
-
             <h2 id="basico_text">Datos Basicos de la Empresa</h2>
-
             <article id="contenedor_datos_empresa">
 
                 <div id="content_empresa">
@@ -79,53 +68,28 @@
                     <table id="tabla_empresa">
 
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Nombre del Inmediato:</td>
-
-                            <td class="basico_empresa">{{Nombre_Jefe}}</td>
-
-                        </tr>
+                            <td class="inicio_datos">Jefe Inmediato:</td>
+                            <td class="basico_empresa">{{Nombre_Jefe}} {{Apellidos_Jefe}}</td>
+                             
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Apellido del Jefe:</td>
-
-                            <td class="basico_empresa">{{Apellidos_Jefe}}</td>
-
-                        </tr>
-                        <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Nombre de la Empresa:</td>
-
+                            <td class="inicio_datos">Empresa:</td>
                             <td class="basico_empresa">{{Nombre_empresa}}</td>
-
                         </tr>
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Direccion de la Empresa:</td>
-
+                            <td class="inicio_datos">Direccion:</td>
                             <td class="basico_empresa">{{Direccion_empresa}}</td>
-
                         </tr>
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Telefono de la Empresa:</td>
-
+                            <td class="inicio_datos">Telefono:</td>
                             <td class="basico_empresa">{{Telefono_empresa}}</td>
-
                         </tr>
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Ciudad de la Empresa:</td>
-
+                            <td class="inicio_datos">Ciudad:</td>
                             <td class="basico_empresa">{{Ciudad_empresa}}</td>
-
                         </tr>
                         <tr class="datos_empresa">
-
-                            <td class="inicio_datos">Correo de la Empresa:</td>
-
+                            <td class="inicio_datos">Correo:</td>
                             <td class="basico_empresa">{{Correo_empresa}}</td>
-
                         </tr>                
                     </table>
                 </div>
@@ -140,12 +104,12 @@
         <section id="modalsi" class="modal">
 
             <article class="contenedor-modal">
-
-                <h2 id="texto-modal">Actualización de Datos Sobre la Empresa</h2>
-
+                
                 <form action="/cambiar_datos_empresa" method="post">
 
-                    <label class="label-inputs">Direccion de la Empresa:
+                    <h2 id="texto-modal">Actualización de Datos Sobre la Empresa</h2>
+
+                    <label class="label-inputs">Direccion:
 
                         <input
                             type="text"
@@ -156,7 +120,7 @@
                             value="{{Direccion_empresa}}">
 
                     </label>
-                    <label class="label-inputs">Telefono de la Empresa:
+                    <label class="label-inputs">Telefono:
 
                         <input
                             type="tel"
@@ -169,7 +133,7 @@
                             value="{{Telefono_empresa}}">
 
                     </label>
-                    <label class="label-inputs">Ciudad de la Empresa:
+                    <label class="label-inputs">Ciudad:
 
                         <input
                             type="tex"
@@ -180,18 +144,17 @@
                             value="{{Ciudad_empresa}}">
 
                     </label>
-                    <label class="label-inputs">Correo de la Empresa:
+                    <label class="label-inputs">Correo:
 
                         <input
                             type="email"
                             required
-                            class="input_datos"
                             id="actualizacion_correo_empresa"
                             name="actualizacion_correo_empresa"
                             value="{{Correo_empresa}}">
 
                     </label>
-                    <label class="label-inputs">Nombre Jefe Inmediato:
+                    <label class="label-inputs">Nombre del Jefe:
 
                         <input
                             type="text"
@@ -201,7 +164,7 @@
                             name="actualizacion_nombre_jefe_empresa"
                             value="{{Nombre_Jefe}}">
                     </label>        
-                    <label class="label-inputs">Apellido Jefe Inmediato:
+                    <label class="label-inputs">Apellido del Jefe:
 
                         <input
                             type="text"
@@ -222,22 +185,6 @@
 
                 <button id="btn-cerrar" onclick="btn_cerrar()">Cerrar</button>
             </article>    
-        </section>
-
-        <section id="content_footer">
-            <footer>
-
-                <p>
-                    Para obtener información adicional, te invitamos a ponerte en contacto 
-                    con la Coordinación de Seguimiento a través del correo electrónico.
-                    
-                    <a
-                        id="correo_cordinacion"
-                        href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJfmqrttsrVgrKKPlKGXJZzpwchfbktjGzshhHznJrLZPpNPVDRJjzbnKmVDThdgpDMZBrL">
-                        Coordinación De Seguimiento
-                    </a>
-                </p>
-            </footer>
         </section>
     </main>
 

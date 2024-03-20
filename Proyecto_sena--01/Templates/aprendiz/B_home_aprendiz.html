@@ -8,26 +8,20 @@
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url_for('static',filename='css/aprendiz/B_home_aprendiz.css') }}">
-
 </head>
 <body>
     
     <header id="inicio">
-
         <section id="content">
 
             <figure class="logo_sena">
 
                 <img src="../static/images/sena_w.png" alt="">
-
             </figure>
 
             <article id="texto">
-
                 <h2>SEPA</h2>
-
                 <p>Seguimiento de Etapa Productiva de Aprendices</p>
-
             </article>
 
             <article id="cerrar">
@@ -38,11 +32,10 @@
     </header>
     
     <main id="menu">
-
         <section id="vinculo">
 
             <a id="home-perfil" href="/mostrarDatos_aprendiz">
-            
+
                 <i class="lni lni-home principal"></i>
             </a>
 
@@ -68,11 +61,8 @@
 
         </section>
         <section id="datos_peques">
-
             <article id="linea">
-
                 <table id="tabla_content">
-    
                     <tr id="datos_pequesAprend">
     
                         <td>{{NombreAprendiz}} {{ApellidoAprendiz}}</td>
@@ -93,7 +83,6 @@
                 </div>
             </article>    
             <article id="modalsi" class="modal">
-        
                 <div class="contenedor-modal">
         
                     <h3 id="texto-modal">Actualización de datos personales</h3>
@@ -127,11 +116,8 @@
 
                         </label>        
                         <button class="Actualizar_Datos" id="Actualizar" type="submit">Actualizar</button>
-
                     </form>   
-
                     <button id="btn-cerrar" onclick="btn_cerrar()">Cerrar</button>
-
                 </div>
             </article>  
         </section>
@@ -198,13 +184,6 @@
 
                     </tr>
                     <tr class="content_dat">
-    
-                        <td class="dat">Carrera:</td>
-    
-                        <td class="cont">{{Carrera}}</td>
-    
-                    </tr>
-                    <tr class="content_dat">
 
                         <td class="dat">Curso:</td>
 
@@ -245,32 +224,19 @@
                     
                             <td id="instructor_fin">Correo:</td>
 
-                            <td id="correo_instructor">
-                                <a 
-                                    id="basicos"
-                                    href="https://mail.google.com/mail/u/0/#inbox?compose=new">
-                            
-                                    {{CorreoInstructor}}
-                                </a>
-                            </td>
+                            <td id="basicos">{{CorreoInstructor}}</td>
                         </tr>
                     </table>
                 </div>
             </article>
         </section>
-        
         <section id="content_footer">
             <footer>
-
                 <p>
                     Para obtener información adicional, te invitamos a ponerte en contacto 
                     con la Coordinación de Seguimiento a través del correo electrónico.
                     
-                    <a
-                        id="correo_cordinacion"
-                        href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJfmqrttsrVgrKKPlKGXJZzpwchfbktjGzshhHznJrLZPpNPVDRJjzbnKmVDThdgpDMZBrL">
-                        Coordinación De Seguimiento
-                    </a>
+                    <p id="correo_cordinacion">seguimientocap@sena.edu.co</p>
                 </p>
             </footer>
         </section>

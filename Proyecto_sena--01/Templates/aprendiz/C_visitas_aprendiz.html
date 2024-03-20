@@ -8,27 +8,19 @@
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ url_for('static',filename='css/aprendiz/C_visitas_aprendiz.css') }}">
-
 </head>
 <body>
-    
-    
+
     <header id="inicio">
-
         <div id="content">
-
             <figure class="logo_sena">
 
                 <img src="../static/images/sena_w.png" alt="">
 
             </figure>
-
             <article id="texto">
-
                 <h2>SEPA</h2>
-
                 <p>Seguimiento de Etapa Productiva de Aprendices</p>
-
             </article>
 
             <article id="cerrar">
@@ -68,41 +60,25 @@
             </a>
 
         </section>
-
         <section id="visitas">
-
             <h3 id="primer_titulo">Visitas realizadas</h3>
-
             <article id="visitas_semaforo">
 
                 <table id="contenido_visita">
-
                     <tr>
-
-                        <td class="visita_titulo">Visita 1</td>
-
+                        <td class="visita_titulo">Visita 1: </td>
                         <td>{{visita_01}}</td>
-                        
                         <td>{{Fecha_Visita1}}</td>
-
                     </tr>
                     <tr>
-
-                        <td class="visita_titulo">Visita 2</td>
-
+                        <td class="visita_titulo">Visita 2: </td>
                         <td>{{visita_02}}</td>
-
                         <td>{{Fecha_Visita2}}</td>
-
                     </tr>
                     <tr>
-
-                        <td class="visita_titulo">Visita 3</td>
-
+                        <td class="visita_titulo">Visita 3: </td>
                         <td>{{visita_03}}</td>
-
                         <td>{{Fecha_Visita3}}</td>
-
                     </tr>
                 </table>
             </article>
@@ -120,16 +96,11 @@
 
         <section id="content_footer">
             <footer>
-
                 <p>
                     Para obtener información adicional, te invitamos a ponerte en contacto 
                     con la Coordinación de Seguimiento a través del correo electrónico.
                     
-                    <a
-                        id="correo_cordinacion"
-                        href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJfmqrttsrVgrKKPlKGXJZzpwchfbktjGzshhHznJrLZPpNPVDRJjzbnKmVDThdgpDMZBrL">
-                        Coordinación De Seguimiento
-                    </a>
+                    <p id="correo_cordinacion">seguimientocap@sena.edu.co</p>
                 </p>
             </footer>
         </section>

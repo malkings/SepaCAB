@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&display=swap');
+
+:root {
+    --azul-oscuro: #00324D;
+    --beige: #FBFBE2;
+    --blanco: #FFF;
+    --blanco-esmaltado: #E2E2E2;
+    --gris-oscuro: #58595B;
+    --gris: #666;
+    --gris-mas-oscuro: #333;
+    --gris-suave: #D1D3D4;
+    --verde-sena: #32A900;    
+    --negro: #000;
+}
+
 * {
   box-sizing: border-box;
   transition: all 0.3s ease-in-out;
@@ -16,7 +31,7 @@ figure {
 body, html{
   margin: 0;
   padding: 0;
-  font-family: 'calibri';
+  font-family: 'Josefin Sans', sans-serif;
   background: rgb(250, 250, 250);
 }
 
@@ -36,7 +51,7 @@ body, html{
     margin: 0px;
     padding: 0px;
     font-size: 35px;
-    color: #333;
+    color: var(--gris-claro);
   }
 
   #texto-modal{
@@ -49,7 +64,7 @@ body, html{
 
   #Actualizar{
     position: relative;
-    background: #32A900;
+    background: var(--verde-sena);
     border: none;
     padding: 0px;
     color: rgb(250, 250, 250);
@@ -78,7 +93,7 @@ body, html{
     background: rgb(250, 250, 250);
     border: none;
     border-radius: 8px;
-    color: #000;
+    color: var(--negro);
     padding: 8px;
     width: 60vw;
     font-size: 16px;
@@ -98,7 +113,7 @@ body, html{
     width: clamp(280px, 83%, 480px);
     min-width: 50vw;
     min-height: 40vh;
-    background: #00324D;
+    background: var(--azul-oscuro);
     border-radius: 16px;
 }
 
@@ -136,9 +151,9 @@ body, html{
     justify-content: center;
     align-items: center;
     height: 80px;
-    border: solid 3px #666;
+    border: solid 3px var(--gris);
     border-radius: 12px;
-    background: #E2E2E2;
+    background: var(--blanco-esmaltado);
   }
 
   #contenedor_cc{
@@ -178,7 +193,7 @@ body, html{
     border-radius: 10px;
     padding: 8px;
     font-size: 24px;
-    background: #32A900;
+    background: var(--verde-sena);
   }
 
   label{
@@ -192,7 +207,7 @@ body, html{
     top: 0;
     width: 100%;
     height: 16vh;
-    background: #32A900;
+    background: var(--verde-sena);
   }
 
   #texto{
@@ -257,7 +272,7 @@ body, html{
     padding: 0;
     min-width: 65vw;
     height: 58vh;
-    background: #DCDCDC;
+    background: var(--gris-suave);
     border-radius: 18px;
   }
 
@@ -288,7 +303,7 @@ body, html{
     padding: 0;
     min-width: 85vw;
     min-height: 40vh;
-    background: #DCDCDC;
+    background: var(--gris-suave);
     border-radius: 18px;
   }
 
@@ -352,7 +367,7 @@ body, html{
     font-size: 16px;
     color: #000;
     border-radius: none;
-    border-bottom: 2px solid #00324D;
+    border-bottom: 2px solid var(--azul-oscuro);
   }
 
 @media screen and (min-width: 360px) {
@@ -437,7 +452,7 @@ body, html{
     margin: 0px;
     padding: 0px;
     font-size: 32px;
-    color: #333;
+    color: var(--gris-mas-oscuro);
   }
 
   #Actualizar{
@@ -1034,7 +1049,7 @@ body, html{
   #content_datAprend02{
     margin: 2px 5px;
     width: 60vw;
-    border: 3px solid #32A900;
+    border: 3px solid var(--verde-sena);
   }
   
   .content_dat{
@@ -1078,4 +1093,6 @@ body, html{
     margin: 15px 0 0 25px;
   }
 }
-/*Pendiente------ resolucion de tablets*/
+
+
+
