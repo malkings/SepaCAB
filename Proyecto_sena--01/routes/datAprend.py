@@ -21,7 +21,7 @@ def mostrarDatos_aprendiz():
             session["user_telefono"] = Datos[0][6] 
             session["user_foto"] = Datos[0][7] 
 
-            return redirect('/mostrar_contrato')   
+            return redirect('/mostrar_contrato') 
         
         else:
             print(f"no se encontro datos", cedula)
@@ -56,11 +56,7 @@ def datInstructor():
     if session.get("logueado"):
 
         cedula = session.get("aprendiz_cedula")
-        sql = f"SELECT id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
-
-        cursor = baseDatos.cursor()
-        cursor.execute(sql)
-        Datos = cursor.fetchall()
+        Datos = aprendices.datBasico(cedula)
 
         if Datos:
             session["id_instructor"] = Datos[0][0]
@@ -89,42 +85,20 @@ def home_aprendiz():
         usuario_formacion = session.get("user_nivel")
         usuario_foto = session.get("user_foto")
 
-        cedula = session.get("aprendiz_cedula")
         instructor = session.get("id_instructor")
 
-        sql = f"SELECT id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
+        Datos = aprendices.datInstructor(instructor)
 
-        cursor = baseDatos.cursor()
-        cursor.execute(sql)
-        Dato = cursor.fetchall()
+        if Datos:
+            session["nombre_instructor"] = Datos[0][1]
+            session["apellido_instructor"] = Datos[0][2]
+            session["correo_instructor"] = Datos[0][3] 
 
-        if Dato:
-            sql = f"SELECT id_instructor, nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'" 
-            cursor = baseDatos.cursor()
-            cursor.execute(sql)
-            Datos = cursor.fetchall()
-
-            if Datos:
-                session["nombres"] = Datos[0][1]
-                session["apellidos"] = Datos[0][2]
-
-                nombres = session.get("nombres")
-                apellidos = session.get("apellidos")
-
-                sql = f"SELECT doc_indentidad, correo FROM usuario_instructor WHERE doc_indentidad='{instructor}'"
-                cursor.execute(sql)
-                Datos_ins = cursor.fetchall()
-
-                if Datos_ins:
-                    session["correo"] = Datos_ins[0][1] 
-                    correo = session.get("correo")
-                else:
-                    raise ValueError("No se encontraron datos del instructor", sql, instructor)
-            else:
-                raise ValueError("No se encontraron datos del instructor", sql, instructor)
-        else:
-            raise ValueError("No se encontraron datos del instructor", sql, instructor)
-
+            nombre_instructor = session.get("nombre_instructor")
+            apellido_instructor = session.get("apellido_instructor")
+            correo_instructor = session.get("correo_instructor")
+            print(Datos)
+                
         return render_template("/aprendiz/B_home_aprendiz.html",
                                
                                #Datos Aprendiz
@@ -145,9 +119,9 @@ def home_aprendiz():
                                nivel = usuario_formacion,
 
                                #Datos Instructor
-                               NombreInstructor = nombres,
-                               ApellidosInstructor = apellidos,
-                               CorreoInstructor = correo) 
+                               NombreInstructor = nombre_instructor,
+                               ApellidosInstructor = apellido_instructor,
+                               CorreoInstructor = correo_instructor) 
 
         #En este apartado logramos que se muestren los datos requeridos en el html
     else:
@@ -164,14 +138,10 @@ def Cambiar_datos_aprendiz():
         telefono = request.form['actualizacion_celular']
         correo = request.form['actualizacion_correo']
 
-        sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
-        #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos        
-        
-        cursor = baseDatos.cursor()
-        cursor.execute(sql)
+        aprendices.actualizarAprend(cedula, telefono, correo)
 
         TomaDatos()
-
+        
         #Datos Aprendiz        
         usuario_nombre = session.get("usuario_nombres")
         usuario_apellido = session.get("usuario_apellidos")
@@ -225,7 +195,7 @@ def TomaDatos():
 
     cedula = session.get("usuario_cedula")    
 
-    sql = f"SELECT telefono, correo FROM aprendices WHERE doc_identificacion = '{cedula}'"
+    sql = f"SELECT aprendices.telefono, usuario_aprendiz.correo FROM aprendices JOIN usuario_aprendiz ON usuario_aprendiz.doc_indentidad = aprendices.doc_identificacion WHERE doc_indentidad = '{cedula}'"
 
     cursor = baseDatos.cursor()
     cursor.execute(sql)
@@ -233,3 +203,5 @@ def TomaDatos():
 
     session["user_telefono2"]=Datos[0][0]
     session["user_correo2"]=Datos[0][1]    
+
+    print(sql)

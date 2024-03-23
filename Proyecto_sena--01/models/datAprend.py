@@ -19,38 +19,23 @@ class Aprendiz:
         Datos = self.cursor.fetchall()
         return Datos
 
-    """ def homeAprend(self, cedula, instructor):
-        sql = f"SELECT  id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
-        self.cursor.execute(sql)
-        Dato = self.cursor.fetchall()
-        
-        if Dato:
-            sql = f"SELECT id_instructor, nombres, apellidos FROM datos_instructor WHERE id_instructor = '{instructor}'"
-            self.cursor.execute(sql)
-            Datos = self.cursor.fetchall()
-
-            if Datos:
-                sql = f"SELECT * FROM usuario_instructor WHERE doc_indentidad='{instructor}'"
-                self.cursor.execute(sql)
-                Datos_ins = self.cursor.fetchall()
-                session["instructor"] = Dato[0][0]
-        
-                return Dato, Datos, Datos_ins
-            else:
-                print("Error al traer datos de la tabla usuario_instructor", sql)
-        else:
-            print("Error al hacer la comparacion en la tabla asignacion")  
-
-        """
-    """ def ActualizarAprend(self, cedula, telefono, correo):
-        sql = f"UPDATE aprendices SET telefono = '{telefono}', correo = '{correo}' WHERE doc_identificacion = '{cedula}'"#En este apartado se tendra que implementar el id, al igual que en el request. form, de igual manera en el html
-        #Para poder hacer correcta el comprobante y que el update sea en un solo id y no en dos        
-        
+    def datInstructor(self, instructor):
+        sql = f"SELECT datos_instructor.id_instructor, datos_instructor.nombres, datos_instructor.apellidos, usuario_instructor.correo FROM datos_instructor JOIN usuario_instructor ON datos_instructor.id_instructor = usuario_instructor.doc_indentidad WHERE id_instructor = '{instructor}'" 
         self.cursor.execute(sql)
         Datos = self.cursor.fetchall()
-
-        return Datos"""
-
-
+        return Datos
+    
+    def datBasico(self, cedula):
+        sql = f"SELECT id_instructor, id_aprendiz FROM asignaciones WHERE id_aprendiz = '{cedula}'"
+        self.cursor.execute(sql)
+        Datos = self.cursor.fetchall()
+        return Datos
+    
+    def actualizarAprend(self, cedula, telefono, correo):
+        sql = f"UPDATE aprendices JOIN usuario_aprendiz ON aprendices.doc_identificacion = usuario_aprendiz.doc_indentidad SET aprendices.telefono = '{telefono}', usuario_aprendiz.correo = '{correo}' WHERE aprendices.doc_identificacion = '{cedula}'"
+        self.cursor.execute(sql)
+        Datos = self.cursor.fetchall()
+        self.baseDatos.commit()
+        return Datos
 
 aprendices = Aprendiz(baseDatos, programa)    

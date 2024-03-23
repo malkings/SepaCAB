@@ -42,7 +42,7 @@ def ingresa_usuario():
                 datosingreso_i = cur.fetchall()
                 
                 ###aprendiz
-                sql = f"SELECT doc_indentidad, clave, estado FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
+                sql = f"SELECT doc_indentidad, clave, estado, correo FROM usuario_aprendiz WHERE doc_indentidad = '{cedulaingreso}' AND clave = '{clavecifrada}'"
                 conexion = mysql.connector.connect(user='root', password='', host='localhost', database='sepa')
                     
                 cur = conexion.cursor()
@@ -88,7 +88,8 @@ def ingresa_usuario():
                                 ##poner variables q usan en aprendiz
                                 session["logueado"]=True
                                 session["aprendiz_cedula"]=datosingreso_a[0][0]
-                                    
+                                session["user_correo"] = datosingreso_a[0][3]
+                                print(datosingreso_a[0][3])
                                 programa.config['PERMANENT_SESSION_LIFETIME'] = 1800 ###INICIALIZA EL TIEMPO DE SESION A 30 MIN
                                     
                                 return redirect('/mostrarDatos_aprendiz')
@@ -480,10 +481,8 @@ def enviar_correo():
         
         mensaje_error_ingreso = "Upss... correo invalido!"
         return render_template('/loginsepa/loginsepa.html', mensaje_error_ingreso=mensaje_error_ingreso)    
-        
-    
+     
 #------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 #Subir foto del aprendiz
 @programa.route('/agregar_foto', methods=['POST'])
 def agregar_foto():
@@ -710,7 +709,6 @@ def Cambiar_datos_empresa():
         else:
 
             razon_social = session.get('usuario_nombre_empresa')
-
             sql = f"INSERT INTO temporal_empresa (id_contrato, razon_social, direccion, tel2, ciudad, correo, nombres, apellidos) VALUES ('{id_contrato}', '{razon_social}','{direccion}', '{telefono}', '{ciudad}', '{correo}', '{nombres}', '{apellidos}') WHERE id_contrato = '{id_contrato}'"
             
             cursor = baseDatos.cursor()

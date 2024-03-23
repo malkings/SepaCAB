@@ -29,37 +29,38 @@
         </article>
     </header>
 
+    <nav id="vinculo">
+
+        <a id="home-perfil" href="/mostrarDatos_aprendiz">
+    
+            <i class="lni lni-home principal"></i>
+        </a>
+
+        <a id="home-visitas" href="/visita_aprendiz">
+        
+            <i class="lni lni-travel principal"></i>
+        </a>
+
+        <a id="home-notificacion" href="/listado">
+            
+            <i class="lni lni-envelope principal"></i>
+        </a>
+
+        <a id="home-empresa" href="/empresa_asignada">
+        
+            <i class="lni lni-apartment principal"></i>
+        </a>
+
+        <a id="home_bitacora" href="/inputRegional">
+            
+            <i class="lni lni-printer"></i>
+        </a>
+
+    </nav>
+
     <main id="menu">
         <section class="Actualizar_datos_empresa">
-
-            <article id="vinculo">
-
-                <a id="home-perfil" href="/mostrarDatos_aprendiz">
-            
-                    <i class="lni lni-home principal"></i>
-                </a>
-    
-                <a id="home-visitas" href="/visita_aprendiz">
-                
-                    <i class="lni lni-travel principal"></i>
-                </a>
-    
-                <a id="home-notificacion" href="/listado">
-                    
-                    <i class="lni lni-envelope principal"></i>
-                </a>
-    
-                <a id="home-empresa" href="/empresa_asignada">
-                
-                    <i class="lni lni-apartment principal"></i>
-                </a>
-    
-                <a id="home_bitacora" href="/inputRegional">
-                    
-                    <i class="lni lni-printer"></i>
-                </a>
-    
-            </article>
+           
             <h2 id="basico_text">Datos Basicos de la Empresa</h2>
             <article id="contenedor_datos_empresa">
 
@@ -70,7 +71,7 @@
                         <tr class="datos_empresa">
                             <td class="inicio_datos">Jefe Inmediato:</td>
                             <td class="basico_empresa">{{Nombre_Jefe}} {{Apellidos_Jefe}}</td>
-                             
+                       
                         <tr class="datos_empresa">
                             <td class="inicio_datos">Empresa:</td>
                             <td class="basico_empresa">{{Nombre_empresa}}</td>
@@ -102,89 +103,87 @@
         </section>
 
         <section id="modalsi" class="modal">
-
             <article class="contenedor-modal">
                 
-                <form action="/cambiar_datos_empresa" method="post">
+                <form action="/cambiar_datos_empresa" method="post" id="modal_empresa">
 
                     <h2 id="texto-modal">Actualización de Datos Sobre la Empresa</h2>
 
                     <label class="label-inputs">Direccion:
 
                         <input
-                            type="text"
-                            required
-                            class="input_datos"
-                            name="actualizacion_direccion_empresa"
-                            id="actualizacion-direccion"
-                            value="{{Direccion_empresa}}">
+                        type="text"
+                        required
+                        class="input_datos"
+                        name="actualizacion_direccion_empresa"
+                        id="actualizacion-direccion"
+                        value="{{Direccion_empresa}}">
 
                     </label>
                     <label class="label-inputs">Telefono:
 
                         <input
-                            type="tel"
-                            min="10"
-                            max="10"
-                            required
-                            class="input_datos"
-                            id="actualizacion-celular"
-                            name="actualizacion-celular"
-                            value="{{Telefono_empresa}}">
+                        type="tel"
+                        min="10"
+                        max="10"
+                        required
+                        class="input_datos"
+                        id="actualizacion-celular"
+                        name="actualizacion-celular"
+                        value="{{Telefono_empresa}}">
 
                     </label>
                     <label class="label-inputs">Ciudad:
 
                         <input
-                            type="tex"
-                            required
-                            class="input_datos"
-                            id="actualizacion_ciudad_empresa"
-                            name="actualizacion_ciudad_empresa"
-                            value="{{Ciudad_empresa}}">
+                        type="tex"
+                        required
+                        class="input_datos"
+                        id="actualizacion_ciudad_empresa"
+                        name="actualizacion_ciudad_empresa"
+                        value="{{Ciudad_empresa}}">
 
                     </label>
                     <label class="label-inputs">Correo:
 
                         <input
-                            type="email"
-                            required
-                            id="actualizacion_correo_empresa"
-                            name="actualizacion_correo_empresa"
-                            value="{{Correo_empresa}}">
+                        type="email"
+                        required
+                        id="actualizacion_correo_empresa"
+                        name="actualizacion_correo_empresa"
+                        value="{{Correo_empresa}}">
 
                     </label>
                     <label class="label-inputs">Nombre del Jefe:
 
                         <input
-                            type="text"
-                            required
-                            class="input_datos"
-                            id="actualizacion_nombre_jefe_empresa"
-                            name="actualizacion_nombre_jefe_empresa"
-                            value="{{Nombre_Jefe}}">
+                        type="text"
+                        required
+                        class="input_datos"
+                        id="actualizacion_nombre_jefe_empresa"
+                        name="actualizacion_nombre_jefe_empresa"
+                        value="{{Nombre_Jefe}}">
                     </label>        
                     <label class="label-inputs">Apellido del Jefe:
 
-                        <input
-                            type="text"
-                            required
-                            class="input_datos"
-                            id="actualizacion_apellido_jefe_empresa"
-                            name="actualizacion_apellido_jefe_empresa"
-                            value="{{Apellidos_Jefe}}">
+                       <input
+                        type="text"
+                        required
+                        class="input_datos"
+                        id="actualizacion_apellido_jefe_empresa"
+                        name="actualizacion_apellido_jefe_empresa"
+                        value="{{Apellidos_Jefe}}">
 
                     </label>
                     <button
-                        class="Actualizar_Datos" 
-                        id="Actualizar" 
-                        type="submit">
-                        Actualizar
-                    </button>
+                    class="Actualizar_Datos" 
+                    id="Actualizar" 
+                    type="submit">Actualizar</button>
                 </form>
-
+            </article>   
+            <div id="caja_cerrar">
                 <button id="btn-cerrar" onclick="btn_cerrar()">Cerrar</button>
-            </article>    
+            </div> 
         </section>
     </main>
 
